@@ -220,7 +220,7 @@ const Page = () => {
                             control={
                               <Checkbox checked={givenPermissions.includes(item.id)} onChange={handleChange} name={item.id} />
                             }
-                            label={item.permission}
+                            label={item.displayName}
                           />)
                         })}
                       </FormGroup>}
