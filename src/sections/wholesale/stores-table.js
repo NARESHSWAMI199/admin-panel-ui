@@ -290,7 +290,7 @@ export const StoresCard = (props) => {
                 <Link title='Store Detail' style={{textDecoration : 'none' , color : 'black'}} href={"/store/"+ store.user?.slug}>
                 { showVisitButton !=false &&
                 <Button type='primary'  style= {{marginTop : '5px',width:'100%'}}  icon={<RightSquareFilled />} primary>
-                      Visit {confirm + ""}
+                      Visit
                   </Button>
     }
                 </Link>

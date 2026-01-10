@@ -71,6 +71,7 @@ export const SettingsPassword = (props) => {
             sx={{ maxWidth: 400 }}
           >
             <TextField
+              required
               fullWidth
               label="Password"
               name="password"
@@ -80,6 +81,7 @@ export const SettingsPassword = (props) => {
               value={values.password}
             />
             <TextField
+              required
               fullWidth
               label="Password (Confirm)"
               name="confirm"
