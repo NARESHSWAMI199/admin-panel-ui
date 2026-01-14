@@ -91,7 +91,6 @@ const Page = ()=> {
       setGivenPermissions([])
     }
 
-
     //console.log(givenPermissions)
   }
 
@@ -160,7 +159,7 @@ const handleClose = () => {
           {/* permissions */}
           <Grid container spacing={3}>
                 {Object.keys(permissions).map((element,index) => {
-                return (<Grid xs={3}
+                return (<Grid xs={4}
                   key={index} >
                   <FormControl sx={{ m: 3 }} component="fieldset" variant="standard">
                     <FormLabel component="legend">{element}</FormLabel>
