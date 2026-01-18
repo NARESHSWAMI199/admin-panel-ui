@@ -140,7 +140,17 @@ const handleClose = () => {
           py: 8
         }}
       >
-        <Container maxWidth="xl">
+        <Container maxWidth="xxl"
+            sx={{
+                  px : {
+                            xs : 1,
+                            sm : 1,
+                            md : 1,
+                            lg : 5,
+                            xl : 5
+                        } 
+            }}
+        >
                     
           
           
@@ -159,7 +169,7 @@ const handleClose = () => {
           {/* permissions */}
           <Grid container spacing={3}>
                 {Object.keys(permissions).map((element,index) => {
-                return (<Grid xs={4}
+                return (<Grid xs={3}
                   key={index} >
                   <FormControl sx={{ m: 3 }} component="fieldset" variant="standard">
                     <FormLabel component="legend">{element}</FormLabel>
