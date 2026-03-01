@@ -92,7 +92,7 @@ export const ServicePlansTable = (props) =>{
                         <TableBody>
                             {servicePlans.map((plan, index) => {
                                 const isSelected = selected.includes(plan.id);
-                                const createdAt = format(plan.createdAt, 'dd/MM/yyyy');
+                                const createdAt = !!plan?.createdAt ? format(plan?.createdAt, 'dd/MM/yyyy') : '';
                                 return (
                                     <TableRow hover key={plan.id} selected={isSelected}>
                                         <TableCell padding="checkbox"></TableCell>

@@ -22,6 +22,7 @@ export const AccountProfile = (props) => {
   const user = props.user
   const createdAt = (!!user && !!user.createdAt) ?  format(user.createdAt, 'dd/MM/yyyy') : "";
   const auth = useAuth();
+  const loggedUser = auth.user
   const [message , setMessage] = useState("")
   const [flag , setFlag] = useState("info")
   const [open , setOpen] = useState(false)
@@ -54,7 +55,9 @@ export const AccountProfile = (props) => {
 
   const handleUpdateLoggedUser = useCallback(
     (slug) => {
-      auth.updateUserDetail(slug)
+      if(loggedUser.slug === user.slug){
+        auth.updateUserDetail(slug)
+      }
     },
     [auth]
   );

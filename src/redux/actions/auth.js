@@ -1,5 +1,6 @@
 import axios from "axios"
 import * as actions from 'src/redux/actions/actions'
+import { host } from "src/utils/util"
 
 
 
@@ -37,13 +38,13 @@ export const authLogout = error =>{
 export function authLogin(email, password) {
     return dispatch => {
     dispatch(authStart())
-    axios.post("http://localhost:8081/admin/auth/login" , {
+    axios.post(host+"/admin/auth/login" , {
         email : email,
         password : password
     })
     .then (res => {
         const token = res.data.res.token
-        localStorage.setItem("token", token)
+        localStorage.setItem("token", "Bearer " + token)
         localStorage.setItem("email",email)
         dispatch(authSuccess(token));
     })

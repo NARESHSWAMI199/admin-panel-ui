@@ -63,6 +63,8 @@ useEffect(()=>{
       setAddress(resStore.address)
       setValues(
         {
+          state : {label : resStore?.address?.state.stateName, id : resStore?.address?.state?.id},
+          city : {label : resStore?.address?.city.cityName, id : resStore?.address?.city?.id},
           street :resStore?.address?.street,
           zipCode : resStore?.address?.zipCode,
           storeEmail : resStore?.email,
@@ -85,13 +87,6 @@ useEffect(()=>{
     axios.get(host+"/admin/address/state")
     .then(res=>{
       setStateList(res.data)
-      let selectedState  = res.data.find(state=>state.id === address?.state);
-      setValues((prevState)=>({
-        ...prevState,
-        state : {
-          label : selectedState?.stateName  || '', id : selectedState?.id
-        } 
-      }))
     })
     .catch(err=>console.log(err))
   },[store])
@@ -106,8 +101,6 @@ useEffect(()=>{
       axios.get(host+`/admin/address/city/${values.state?.id}`)
       .then(res=>{
           setCityList(res.data)
-          let selectedCity = res.data.find(city=>city.id === address?.city)
-          setValues((prevState)=>({...prevState, city : {label : selectedCity?.cityName || '', id : selectedCity?.id}}))
         })
       .catch(err=>console.log(err))
   }
@@ -350,7 +343,7 @@ return ( <>
                 fullWidth
                 name="state"
                 value={values.state?.label || ''}
-                onChange={(e,value)=>setValues((prevState)=>({...prevState, state : value }))}
+                onChange={(e,value)=>setValues((prevState)=>({...prevState, state : value, city : {label : '', id : ''}}))}
                 renderInput={(params) => <TextField required {...params} label="State" />} >
             </Autocomplete> 
 

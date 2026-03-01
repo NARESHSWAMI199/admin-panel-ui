@@ -173,12 +173,12 @@ export const AuthProvider = (props) => {
       password: password
     })
       .then(res => {
-        const token = res.data.token
+        const token = "Bearer " + res.data.token
         const paginations = res.data.paginations
         const user = res.data.user
         if (typeof window !== 'undefined') {
           window.sessionStorage.setItem('authenticated', 'true');
-          window.sessionStorage.setItem('token', token);
+          window.sessionStorage.setItem('token',token);
           window.sessionStorage.setItem("user", JSON.stringify(user))
           window.sessionStorage.setItem("paginations",JSON.stringify(paginations))
         }
