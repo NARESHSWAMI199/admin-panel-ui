@@ -176,6 +176,7 @@ const UpdateItem = () => {
                 subCategoryId: formData.get("subcategory"),
                 capacity : !!values.unit && values.unit != 'null' ? formData.get('capacity') : 0 ,
                 measureUnit : formData.get('measureUnit'),
+                wholesaleSlug : values.storeSlug,
                 previousItemImages : previousImages,
                 newItemImages : newImages
             }

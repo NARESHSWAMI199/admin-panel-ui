@@ -78,7 +78,7 @@ export const GroupTable = (props) => {
 
 
   useEffect(()=>{
-    setItems((props.items).filter(group => !assignGroup.includes(group.id)|| user.id == 0))
+    setItems((props.items))
   },[props.items])
 
   
