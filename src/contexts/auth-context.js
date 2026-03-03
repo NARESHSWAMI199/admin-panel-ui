@@ -163,6 +163,8 @@ export const AuthProvider = (props) => {
 
   const signIn = async (email, password, method) => {
 
+    debugger
+
     let baseUrl = host + "/admin/auth/login"
     if (method == 'OTP') {
       baseUrl = host + "/admin/auth/login/otp"
