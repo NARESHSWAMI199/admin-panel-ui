@@ -128,10 +128,15 @@ export const StoresCard = (props) => {
           }}
           >
           <ImageContainer>
+            {store.avtar ?
               <Image
-                  src= {storeImage+store.slug+"/"+store.avtar}
-                  alt="Live from space store cover"
-            />
+                src= {storeImage+store.slug+"/"+store.avtar}
+              />
+              :
+              <Box sx={{display:'flex', justifyContent:'center', alignItems:'center', width:'100%', height:'100%', p:2}}>
+                <ShoppingCartCheckoutIcon sx={{ fontSize: 80, color: '#9e9e9e' }} />
+              </Box>
+            }
            </ImageContainer>
           </Grid>
 
