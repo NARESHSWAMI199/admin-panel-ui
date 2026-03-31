@@ -181,7 +181,12 @@ export const CustomersTable = (props) => {
                   </TableCell>
                   {/* email */}
                   <TableCell>
-                    {customer.email}
+                    <Link title='Mail to' style={{
+                      textDecoration: 'none',
+                      color: 'black' 
+                    }} href={"mailto:" + customer.email}>
+                      {customer.email}
+                    </Link>
                   </TableCell>
                   {/* <TableCell>
                       {customer.address.city}, {customer.address.state}, {customer.address.country}

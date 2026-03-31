@@ -136,7 +136,7 @@ const Page = () => {
         setCustomers((items) =>items.filter((item) => item.slug !== slug));
     }).catch(err => {
       console.log(err)
-      setMessage(err.message)
+      setMessage(!!err.response ? err.response.data.message : err.message)
       setFlag("error")
       setOpen(true)
     } )

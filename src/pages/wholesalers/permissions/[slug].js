@@ -151,7 +151,8 @@ const handleClose = () => {
                 <Grid xs={2}>
                   <FormControlLabel sx={{mx:5}}
                     control={
-                      <Checkbox checked={givenPermissions.length > 0} indeterminate={givenPermissions.length > 0}  onChange={allowAll} name={0} />
+                      <Checkbox checked={givenPermissions.length == Object.keys(permissions).reduce((total, key) => total + permissions[key].length, 0)} 
+                      indeterminate={givenPermissions.length > 0 && givenPermissions.length < Object.keys(permissions).reduce((total, key) => total + permissions[key].length, 0)}  onChange={allowAll} name={0} />
                     }
                     label={"All Permissions"}/>
                 </Grid>

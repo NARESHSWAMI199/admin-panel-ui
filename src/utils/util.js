@@ -25,7 +25,7 @@ export const toTitleCase = (str) => {
   export const userImage = host+"/admin/auth/profile/"
 
 
-  export const suId = 0;
+  export const suId = 1;
   export const projectName= "Swami Sales";
   export const rowsPerPageOptions=[10, 25 , 50]
   export const ruppeeIcon = "₹";
