@@ -89,7 +89,8 @@ export const PlanTable = (props) => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {plans.map((plan, index) => {
+            {plans.length > 0 ? 
+              plans.map((plan, index) => {
                 const isSelected = selected.includes(plan.slug);
                 const createdAt = format(plan.createdAt, 'dd/MM/yyyy');
                 const expiryDate = format(plan.expiryDate, 'dd/MM/yyyy');
@@ -184,8 +185,17 @@ export const PlanTable = (props) => {
                     </TableCell>
                   </TableRow>
 
-                );
-              })}
+                )}) :
+                <TableRow>
+                    <TableCell align='center' colSpan={12}>
+                      <Typography variant='subtitle1'>
+                      No plans found.
+                      </Typography>
+                    </TableCell>
+                </TableRow>
+            }
+              
+              
             </TableBody>
           </Table>
         </Box>

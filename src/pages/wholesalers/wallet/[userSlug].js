@@ -94,7 +94,7 @@ const Page = () => {
 
   return (
     <Box component="main" sx={{ flexGrow: 1, py: 8 }}>
-      <Container maxWidth="xl">
+      <Container maxWidth="xxl">
         <Stack spacing={3}>
           <Grid xs={12} md={6} lg={8}>
             <Typography variant="h6" sx={{ color : 'text.muted' }}>

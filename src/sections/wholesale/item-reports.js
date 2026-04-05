@@ -54,7 +54,7 @@ export const ItemReports = (props) => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {itemReports.length ?  itemReports.map((itemReport,index) => {
+              {itemReports.length > 0 ?  itemReports.map((itemReport,index) => {
                 const isSelected = selected.includes(itemReport.slug);
                 const createdAt = format(itemReport.createdAt, 'dd/MM/yyyy');
                 return (

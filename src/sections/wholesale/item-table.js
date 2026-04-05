@@ -161,7 +161,8 @@ export const ItemsTable = (props) => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {items.map((item,index) => {
+              { items.length > 0 ?
+              items.map((item,index) => {
                 const isSelected = selected.includes(item.slug);
                 const createdAt = format(item.createdAt, 'dd/MM/yyyy');
 
@@ -409,7 +410,13 @@ export const ItemsTable = (props) => {
                   </TableRow>
 
                 );
-              })}
+              }):
+              <TableRow>
+                <TableCell colSpan={12} align="center">
+                  No items found.
+                </TableCell>
+              </TableRow>
+              }
             </TableBody>
           </Table>
         </Box>

@@ -26,7 +26,6 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
-
 import { AccountBalanceWalletOutlined, PaidOutlined, WalletOutlined } from '@mui/icons-material';
 import AccessibilityNewIcon from '@mui/icons-material/AccessibilityNew';
 import EditIcon from '@mui/icons-material/Edit';
@@ -271,7 +270,7 @@ export const CustomersTable = (props) => {
                             query: { userSlug: customer.slug },
                           }}
                         >
-                          <AccountBalanceWalletOutlined sx={{
+                          <PaidOutlined sx={{
                             marginX: '5px',
                             color: '#111927'
                           }}
@@ -287,7 +286,7 @@ export const CustomersTable = (props) => {
                             query: { userSlug: customer.slug },
                           }}
                         >
-                          <PaidOutlined sx={{
+                          <AccountBalanceWalletOutlined sx={{
                             marginX: '5px',
                             color: '#111927'
                           }}

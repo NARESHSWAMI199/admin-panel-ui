@@ -90,7 +90,8 @@ export const ServicePlansTable = (props) =>{
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {servicePlans.map((plan, index) => {
+                            {service.length > 0 ?
+                            servicePlans.map((plan, index) => {
                                 const isSelected = selected.includes(plan.id);
                                 const createdAt = !!plan?.createdAt ? format(plan?.createdAt, 'dd/MM/yyyy') : '';
                                 return (
@@ -194,7 +195,14 @@ export const ServicePlansTable = (props) =>{
                                         </TableCell>
                                     </TableRow>
                                 );
-                            })}
+                            })
+                            :
+                            <TableRow>
+                                <TableCell colSpan={12} align="center">
+                                    <Typography variant="subtitle1">No service plan found.</Typography>
+                                </TableCell>
+                            </TableRow>
+                        }
                         </TableBody>
                     </Table>
                 </Box>
