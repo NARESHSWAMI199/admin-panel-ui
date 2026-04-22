@@ -24,7 +24,7 @@ import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
 import EditIcon from '@mui/icons-material/Edit';
-import axios from 'axios';
+import { apiRequest } from 'src/utils/api-request';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import CopyButton from 'src/components/CopyButton';
@@ -60,10 +60,7 @@ export const GroupTable = (props) => {
 
   useEffect( ()=>{
     const getData = async () => {
-       axios.defaults.headers = {
-         Authorization : auth.token
-       }
-       await axios.get(host+"/admin/auth/groups/"+user.slug)
+       await apiRequest.get("/admin/auth/groups/"+user.slug)
        .then(res => {
           const data = res.data.content
           setAssignGroup(data);

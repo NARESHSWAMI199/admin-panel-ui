@@ -6,9 +6,8 @@ import { Layout as DashboardLayout } from 'src/layouts/dashboard/layout';
 import MagnifyingGlassIcon from '@heroicons/react/24/solid/MagnifyingGlassIcon';
 import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
 import { BasicHeaders } from 'src/sections/basic-header';
-import axios, { all } from 'axios';
+import { apiRequest } from 'src/utils/api-request';
 import { useAuth } from 'src/hooks/use-auth';
-import { host } from 'src/utils/util';
 import { useRouter } from 'next/router';
 
 const Page = ()=> {
@@ -26,12 +25,8 @@ const Page = ()=> {
 
 
   useEffect(() => {
-    axios.defaults.headers = {
-      Authorization: auth.token
-    }
-
     // Get all permmission 
-    axios.get(host + "/admin/auth/wholesale/permissions/"+slug)
+    apiRequest.get("/admin/auth/wholesale/permissions/"+slug)
       .then(res => {
         let allPermissions = res.data.allPermissions;
         setPermissions(allPermissions)
@@ -54,12 +49,8 @@ const Page = ()=> {
       userType : "W",
       slug : slug,
       storePermissions : givenPermissions
-
     }
-    axios.defaults.headers = {
-      Authorization: auth.token
-    }
-    axios.post(host + "/admin/auth/wholesaler/permissions/update",data)
+    apiRequest.post("/admin/auth/wholesaler/permissions/update",data)
       .then(res => {
         let response = res.data;
         console.log(response)

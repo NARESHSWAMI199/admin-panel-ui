@@ -20,7 +20,7 @@ import {
   SvgIcon,
   TextField
 } from "@mui/material";
-import axios from "axios";
+import { apiRequest } from "src/utils/api-request";
 import { useRouter } from "next/router";
 import { useCallback, useEffect, useState } from "react";
 import { useAuth } from "src/hooks/use-auth";
@@ -47,12 +47,8 @@ const [subcategories,setItemSubCategories] = useState([])
 const [values,setValues] = useState({})
 
 useEffect(()=>{
-  axios.defaults.headers={
-      Authorization : auth.token,
-  }
-
   // Setting the store detail
-  axios.get(host+"/admin/store/detail/"+slug)
+  apiRequest.get("/admin/store/detail/"+slug)
   .then(res=>{
       let resStore = res.data.res;
 
@@ -81,10 +77,7 @@ useEffect(()=>{
 useEffect(()=>{
     // do't call api if store is null or undefiend
     if(!store) return 
-    axios.defaults.headers={
-        Authorization : auth.token
-    }
-    axios.get(host+"/admin/address/state")
+    apiRequest.get("/admin/address/state")
     .then(res=>{
       setStateList(res.data)
     })
@@ -95,10 +88,7 @@ useEffect(()=>{
 
 useEffect(()=>{
   const getCity = async () => { 
-      axios.defaults.headers={
-        Authorization : auth.token
-      }
-      axios.get(host+`/admin/address/city/${values.state?.id}`)
+      apiRequest.get(`/admin/address/city/${values.state?.id}`)
       .then(res=>{
           setCityList(res.data)
         })
@@ -113,10 +103,7 @@ useEffect(()=>{
 
 useEffect(() => {
   const getData = async () => {
-      axios.defaults.headers = {
-          Authorization: auth.token
-      }
-      await axios.post(host + "/admin/store/category",{order :'asc' , orderBy : 'category'})
+      await apiRequest.post("/admin/store/category",{order :'asc' , orderBy : 'category'})
           .then(res => {
               const data = res.data;
               setItemCategories(data)
@@ -134,10 +121,7 @@ useEffect(() => {
 
 useEffect(() => {
 const getSubcategory = async () => {
-    axios.defaults.headers = {
-        Authorization: auth.token
-    }
-    await axios.post(host + "/admin/store/subcategory", {categoryId : values.category?.id,order :'asc' , orderBy : 'subcategory'})
+    await apiRequest.post("/admin/store/subcategory", {categoryId : values.category?.id,order :'asc' , orderBy : 'subcategory'})
         .then(res => {
             const data = res.data;
             setItemSubCategories(data)
@@ -198,11 +182,7 @@ const handleSubmit = async (e) =>{
     subCategoryId: values.subcategory?.id
   }
   
-    axios.defaults.headers = {
-        Authorization : auth.token,
-         "Content-Type" : "multipart/form-data"
-    }
-    await axios.post(host+"/admin/store/update",storeData)
+    await apiRequest.post("/admin/store/update",storeData)
     .then(res => {
       // setStore((previous) => ({...previous , avtar : !!store.storePic ? store.storePic.name  : store.avtar }))  
       setMessage(res.data.message)

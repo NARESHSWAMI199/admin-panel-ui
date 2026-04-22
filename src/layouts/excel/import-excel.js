@@ -15,8 +15,7 @@ import { Space, Upload, message } from 'antd';
 import { Form } from 'formik';
 import { useState } from 'react';
 import { InboxOutlined } from '@ant-design/icons';
-import axios from 'axios';
-import { host } from 'src/utils/util';
+import { apiRequest } from 'src/utils/api-request';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
@@ -54,7 +53,7 @@ export default function DialogFormForExcelImport({ importExcelSheet }) {
   };
 
   const downloadTemplate = () => {
-    axios.get(host+'/admin/item/download/update/template', { responseType: 'blob' })
+    apiRequest.get('/admin/item/download/update/template', { responseType: 'blob' })
       .then(response => {
         const url = window.URL.createObjectURL(new Blob([response.data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }));
         const link = document.createElement('a');

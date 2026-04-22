@@ -1,5 +1,5 @@
 import { Alert, Box, Container, Snackbar, Stack } from '@mui/material';
-import axios from 'axios';
+import { apiRequest } from 'src/utils/api-request';
 import Head from 'next/head';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useAuth } from 'src/hooks/use-auth';
@@ -9,7 +9,7 @@ import { BasicSearch } from 'src/sections/basic-search';
 import { CustomerHeaders } from 'src/sections/customer/customers-header';
 import { CustomersTable } from 'src/sections/customer/customers-table';
 import { applyPagination } from 'src/utils/apply-pagination';
-import { host, rowsPerPageOptions } from 'src/utils/util';
+import { rowsPerPageOptions } from 'src/utils/util';
 
 
 
@@ -65,10 +65,7 @@ const Page = () => {
 
   useEffect( ()=>{
     const getData = async () => {
-       axios.defaults.headers = {
-         Authorization : auth.token
-       }
-       await axios.post(`${host}/admin/auth/${!!data?.userType ? data.userType : 'A'}/all`,data)
+       await apiRequest.post(`/admin/auth/${!!data?.userType ? data.userType : 'A'}/all`,data)
        .then(res => {
           const response = res.data.content;
            setTotalElements(res.data.totalElements)
@@ -95,10 +92,7 @@ const Page = () => {
   }
 
   const onStatusChange = (slug,status) => {
-    axios.defaults.headers = {
-      Authorization :  auth.token  
-    }
-    axios.post(host+`/admin/auth/status`,{
+    apiRequest.post(`/admin/auth/status`,{
       slug : slug,
       status : status
     })
@@ -123,10 +117,7 @@ const Page = () => {
 
   
   const onDelete = (slug) => {
-    axios.defaults.headers = {
-      Authorization :  auth.token  
-    }
-    axios.post(`${host}/admin/auth/delete`,{
+    apiRequest.post(`/admin/auth/delete`,{
       slug : slug
     })
     .then(res => {

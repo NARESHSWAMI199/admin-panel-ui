@@ -1,7 +1,7 @@
 import { Box, Button, Card, CardActions, CardContent, CardHeader, Divider, FormControl, Grid, InputLabel, MenuItem, Select, Stack, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
-import axios from 'axios'
-import { host, rowsPerPageOptions } from 'src/utils/util';
+import { apiRequest } from 'src/utils/api-request'
+import { rowsPerPageOptions } from 'src/utils/util';
 import { useAuth } from 'src/hooks/use-auth';
 
 
@@ -12,11 +12,8 @@ export const  PaginationSettings = (props) => {
     const auth = useAuth()
 
     useEffect(()=> {
-        axios.defaults.headers = {
-            Authorization: auth.token
-          }
         // get all pagination setting labels
-        axios.get(host + "/admin/pagination/all")
+        apiRequest.get("/admin/pagination/all")
         .then(res => {
             let sortingLables = Object.values(res.data);  // there we get a object with key ; value where in value we all detail about keys and rowNumbers
             setSortingLabels(sortingLables)
@@ -33,12 +30,9 @@ export const  PaginationSettings = (props) => {
     },[])
 
     // TODO ; make sure call from auth-context or redux side 
-    axios.defaults.headers = {
-        Authorization: auth.token
-      }
     const handleChange = (event,pagination) => {
         let rowsNumber = event.target.value;
-        axios.post(host + "/admin/pagination/update", {
+        apiRequest.post("/admin/pagination/update", {
             paginationId : pagination.id,
             rowsNumber : rowsNumber
         })

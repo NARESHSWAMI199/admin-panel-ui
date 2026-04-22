@@ -1,6 +1,5 @@
-import axios from "axios"
+import { apiRequest } from "src/utils/api-request"
 import * as actions from 'src/redux/actions/actions'
-import { host } from "src/utils/util"
 
 
 
@@ -38,7 +37,7 @@ export const authLogout = error =>{
 export function authLogin(email, password) {
     return dispatch => {
     dispatch(authStart())
-    axios.post(host+"/admin/auth/login" , {
+    apiRequest.post("/admin/auth/login" , {
         email : email,
         password : password
     })

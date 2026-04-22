@@ -1,7 +1,6 @@
 import { createContext, useContext, useEffect, useReducer, useRef } from 'react';
 import PropTypes from 'prop-types';
-import axios from 'axios';
-import { host } from 'src/utils/util';
+import { apiRequest } from 'src/utils/api-request';
 
 const HANDLERS = {
   INITIALIZE: 'INITIALIZE',
@@ -163,12 +162,12 @@ export const AuthProvider = (props) => {
 
   const signIn = async (email, password, method) => {
 
-    let baseUrl = host + "/admin/auth/login"
+    let endpoint = "/admin/auth/login"
     if (method == 'OTP') {
-      baseUrl = host + "/admin/auth/login/otp"
+      endpoint = "/admin/auth/login/otp"
     }
 
-    await axios.post(baseUrl, {
+    await apiRequest.post(endpoint, {
       email: email,
       password: password
     })
@@ -201,10 +200,7 @@ export const AuthProvider = (props) => {
   };
 
   const updateUserDetail = async (slug) => {
-    axios.defaults.headers = {
-      Authorization: initialState.token
-    }
-    await axios.get(host + "/admin/auth/detail/" + slug)
+    await apiRequest.get("/admin/auth/detail/" + slug)
       .then(res => {
         const user = res.data.res
         window.sessionStorage.setItem("user", JSON.stringify(user))

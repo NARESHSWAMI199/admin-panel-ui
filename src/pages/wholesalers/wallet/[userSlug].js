@@ -1,5 +1,5 @@
 import { Alert, Box, Button, Card, CardActions, CardContent, CardHeader, Container, Divider, Unstable_Grid2 as Grid, InputAdornment, Snackbar, Stack, TextField, Typography } from "@mui/material";
-import axios from "axios";
+import { apiRequest } from "src/utils/api-request";
 import { ru } from "date-fns/locale";
 import { useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useState, useMemo } from "react";
@@ -7,7 +7,7 @@ import { useAuth } from 'src/hooks/use-auth';
 import { useSelection } from "src/hooks/use-selection";
 import { Layout as DashboardLayout } from 'src/layouts/dashboard/layout';
 import { WalletTransactions } from "src/sections/wholesale/wallet-transaction";
-import { host, rowsPerPageOptions, ruppeeIcon } from 'src/utils/util';
+import { rowsPerPageOptions, ruppeeIcon } from 'src/utils/util';
 
 const Page = () => {
   const [open, setOpen] = useState(false);
@@ -31,10 +31,7 @@ const Page = () => {
         
 
   useEffect(() => {
-    axios.defaults.headers = {
-      Authorization: auth.token
-    } 
-    axios.get(`${host}/admin/store/wallet/${slug}`)
+    apiRequest.get(`/admin/store/wallet/${slug}`)
       .then(res => {
         const data = res.data;
         setWalletAmount(data.amount)
@@ -51,10 +48,7 @@ const Page = () => {
 
   // Fetch transactions
   useEffect(() => {
-    axios.defaults.headers = {
-      Authorization: auth.token
-    } 
-    axios.post(`${host}/admin/store/wallet/transactions/all/${slug}`,data)
+    apiRequest.post(`/admin/store/wallet/transactions/all/${slug}`,data)
       .then(res => {
         const data = res.data.content;
         setTransactions(data);

@@ -35,7 +35,7 @@ import Link from 'next/link';
 import EditIcon from '@mui/icons-material/Edit';
 import { host } from 'src/utils/util';
 import { useAuth } from 'src/hooks/use-auth';
-import axios from 'axios';
+import { apiRequest } from 'src/utils/api-request';
 import { CopyOutlined } from '@ant-design/icons';
 
 

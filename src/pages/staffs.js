@@ -9,8 +9,8 @@ import { Layout as DashboardLayout } from 'src/layouts/dashboard/layout';
 import { CustomersTable } from 'src/sections/customer/customers-table';
 import { BasicSearch, CustomersSearch } from 'src/sections/basic-search';
 import { applyPagination } from 'src/utils/apply-pagination';
-import axios, { all } from 'axios';
-import { host, rowsPerPageOptions } from 'src/utils/util';
+import { apiRequest } from 'src/utils/api-request';
+import { rowsPerPageOptions } from 'src/utils/util';
 import { useAuth } from 'src/hooks/use-auth';
 import MagnifyingGlassIcon from '@heroicons/react/24/solid/MagnifyingGlassIcon';
 import { Card, InputAdornment, OutlinedInput } from '@mui/material';
@@ -70,10 +70,7 @@ const Page = () => {
 
   useEffect( ()=>{
     const getData = async () => {
-       axios.defaults.headers = {
-         Authorization : auth.token
-       }
-       await axios.post(host+"/admin/auth/S/all",data)
+       await apiRequest.post("/admin/auth/S/all",data)
        .then(res => {
            setTotalElements(res.data.totalElements)
            setCustomers(res.data.content);
@@ -102,10 +99,7 @@ const Page = () => {
 
 
   const onStatusChange = (slug,status) => {
-    axios.defaults.headers = {
-      Authorization :  auth.token  
-    }
-    axios.post(host+`/admin/auth/status`,{
+    apiRequest.post(`/admin/auth/status`,{
       slug : slug,
       status : status
     })
@@ -129,10 +123,7 @@ const Page = () => {
 
   
   const onDelete = (slug) => {
-    axios.defaults.headers = {
-      Authorization :  auth.token  
-    }
-    axios.post(`${host}/admin/auth/delete`,{
+    apiRequest.post(`/admin/auth/delete`,{
       slug : slug
     })
     .then(res => {

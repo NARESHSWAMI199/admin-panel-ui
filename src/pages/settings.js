@@ -4,8 +4,7 @@ import { SettingsNotifications } from 'src/sections/settings/settings-notificati
 import { SettingsPassword } from 'src/sections/settings/settings-password';
 import { Layout as DashboardLayout } from 'src/layouts/dashboard/layout';
 import { useState } from 'react';
-import { host } from 'src/utils/util';
-import axios from 'axios';
+import { apiRequest } from 'src/utils/api-request';
 import { useAuth } from 'src/hooks/use-auth';
 import { tr } from 'date-fns/locale';
 import { PaginationSettings } from 'src/sections/settings/pagination-settings';
@@ -31,11 +30,7 @@ const Page = () => {
         slug: slug,
         password: password
       }
-
-      axios.defaults.headers = {
-        Authorization: auth.token
-      }
-      await axios.post(host + "/admin/auth/password", user)
+      await apiRequest.post("/admin/auth/password", user)
         .then(res => {
           setMessage(res.data.message)
           setFlag("success")

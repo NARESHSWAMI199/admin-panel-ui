@@ -16,14 +16,14 @@ import { Box,
     Container,
     Stack
 } from "@mui/material";
-import axios from "axios";
+import { apiRequest } from "src/utils/api-request";
 import { useRouter } from "next/router";
 import { useCallback, useEffect, useState } from "react";
 import { useAuth } from "src/hooks/use-auth";
 import { ArrowButtons } from "src/layouts/arrow-button";
 import { Layout as DashboardLayout } from 'src/layouts/dashboard/layout';
 import { BasicHeaders } from "src/sections/basic-header";
-import { host, suId } from "src/utils/util";
+import { suId } from "src/utils/util";
 
 
 
@@ -53,10 +53,7 @@ const [data,setData] = useState({
 })
 
 useEffect(()=>{
-    axios.defaults.headers={
-        Authorization : auth.token
-    }
-    axios.get(host+"/admin/address/state")
+    apiRequest.get("/admin/address/state")
     .then(res=>setStateList(res.data))
     .catch(err=>console.log(err))
 },[])
@@ -64,10 +61,7 @@ useEffect(()=>{
 
 useEffect( ()=>{
   const getData = async () => {
-     axios.defaults.headers = {
-       Authorization : auth.token
-     }
-     await axios.post(host+"/group/all",data)
+     await apiRequest.post("/group/all",data)
      .then(res => {
         const data = res.data.content;
         if(user.id != suId || userType != 'SA'){
@@ -89,10 +83,7 @@ useEffect( ()=>{
 
 
 useEffect(()=>{
-  axios.defaults.headers={
-    Authorization : auth.token
-  }
-  axios.get(host+`/admin/address/city/${values.state}`)
+  apiRequest.get(`/admin/address/city/${values.state}`)
   .then(res=>{
       setCityList(res.data)}
       )
@@ -115,10 +106,7 @@ useEffect(()=>{
 
   useEffect(() => {
     const getData = async () => {
-        axios.defaults.headers = {
-            Authorization: auth.token
-        }
-        await axios.post(host + "/admin/store/category",{orderBy : 'category', order : 'asc'})
+        await apiRequest.post("/admin/store/category",{orderBy : 'category', order : 'asc'})
             .then(res => {
                 const data = res.data;
                 setItemCategories(data)
@@ -136,10 +124,7 @@ useEffect(()=>{
 
   useEffect(() => {
   const getSubcategory = async () => {
-      axios.defaults.headers = {
-          Authorization: auth.token
-      }
-      await axios.post(host + "/admin/store/subcategory",{categoryId : values.category , orderBy : 'subcategory', order : 'asc'})
+      await apiRequest.post("/admin/store/subcategory",{categoryId : values.category , orderBy : 'subcategory', order : 'asc'})
           .then(res => {
               const data = res.data;
               setItemSubCategories(data)
@@ -181,10 +166,7 @@ useEffect(()=>{
         description : values.description
     }
 
-    axios.defaults.headers = {
-        Authorization : auth.token
-    }
-    axios.post(host+"/admin/plans/add",data)
+    apiRequest.post("/admin/plans/add",data)
     .then(res => {
       setMessage(res.data.message)
       setFlag("success")

@@ -1,6 +1,6 @@
 import ArrowDownOnSquareIcon from '@heroicons/react/24/solid/ArrowDownOnSquareIcon';
 import { Alert, Box, Button, Container, Snackbar, Stack, SvgIcon } from '@mui/material';
-import axios from 'axios';
+import { apiRequest } from 'src/utils/api-request';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useMemo, useState } from 'react';
@@ -61,10 +61,7 @@ const Page = () => {
 
     useEffect(() => {
         const getData = async () => {
-            axios.defaults.headers = {
-                Authorization: auth.token
-            }
-            await axios.post(host + "/admin/item/all", data)
+            await apiRequest.post("/admin/item/all", data)
                 .then(res => {
                     const data = res.data.content;
                     setTotalElements(res.data.totalElements)
@@ -101,10 +98,7 @@ const Page = () => {
     };
 
     const onStatusChange = (slug, status) => {
-        axios.defaults.headers = {
-            Authorization: auth.token
-        }
-        axios.post(host + `/admin/item/status`, {
+        apiRequest.post(`/admin/item/status`, {
             slug: slug,
             status: status
         })
@@ -152,10 +146,7 @@ const Page = () => {
 
 
     const onChangeInStock = (slug, inStock) => {
-        axios.defaults.headers = {
-            Authorization: auth.token
-        }
-        axios.post(host + `/admin/item/stock`, {
+        apiRequest.post(`/admin/item/stock`, {
             slug: slug,
             stock: inStock
         })
@@ -180,10 +171,7 @@ const Page = () => {
     
 
     const onDelete = (slug) => {
-        axios.defaults.headers = {
-            Authorization: auth.token
-        }
-        axios.post(`${host}/admin/item/delete`,{
+        apiRequest.post(`/admin/item/delete`,{
             "slug" : slug
         })
         .then(res => {
@@ -247,11 +235,7 @@ const Page = () => {
         if (!confirmDownload) {
             return;
         }
-
-        axios.defaults.headers = {
-            Authorization: auth.token
-        }
-        await axios.post(host + '/admin/item/exportExcel', {...data, size: totalElements}, { responseType: 'blob' })
+        await apiRequest.post('/admin/item/exportExcel', {...data, size: totalElements}, { responseType: 'blob' })
             .then(response => {
                 const url = window.URL.createObjectURL(new Blob([response.data], 
                     { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }));

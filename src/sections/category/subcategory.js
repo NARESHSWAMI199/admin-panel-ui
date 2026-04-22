@@ -5,7 +5,7 @@ import { CropSquareSharp, DeleteOutline } from '@mui/icons-material';
 import CloseIcon from '@mui/icons-material/Close';
 import { useTheme } from '@emotion/react';
 import { host } from 'src/utils/util';
-import axios from 'axios';
+import { apiRequest } from 'src/utils/api-request';
 
 var categoryIcon = null;
 const SubcategoryCard = (props) => {

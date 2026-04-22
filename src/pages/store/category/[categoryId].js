@@ -16,7 +16,7 @@ import { Box,
   Stack,
   SvgIcon,
 } from "@mui/material";
-import axios from "axios";
+import { apiRequest } from "src/utils/api-request";
 import { useCallback, useEffect, useState } from "react";
 import { useAuth } from "src/hooks/use-auth";
 import { Layout as DashboardLayout } from 'src/layouts/dashboard/layout';
@@ -54,10 +54,7 @@ const [showSpinner , setShowSpinner] = useState('block')
 
 useEffect(() => {
   const getAllCategories = async () => {
-      axios.defaults.headers = {
-          Authorization: auth.token
-      }
-      await axios.post(host + "/admin/store/category",{order :'asc' , orderBy : 'category'})
+      await apiRequest.post("/admin/store/category",{order :'asc' , orderBy : 'category'})
           .then(res => {
               const data = res.data;
               setCategories(data)
@@ -74,10 +71,7 @@ useEffect(() => {
 
 useEffect(() => {
   const getCategory = async () => {
-      axios.defaults.headers = {
-          Authorization: auth.token
-      }
-      await axios.get(host + "/admin/store/category/"+values.category)
+      await apiRequest.get("/admin/store/category/"+values.category)
           .then(res => {
               const data = res.data;
               setValues({...data, category : data.id})
@@ -97,11 +91,8 @@ useEffect(() => {
 
 useEffect(() => {
   const getAllSubcategories = async () => {
-      axios.defaults.headers = {
-          Authorization: auth.token
-      }
       setShowSpinner('block')
-      await axios.post(host + "/admin/store/subcategory",{categoryId : values.category,orderBy : 'updatedAt'})
+      await apiRequest.post("/admin/store/subcategory",{categoryId : values.category,orderBy : 'updatedAt'})
           .then(res => {
               const data = res.data;
               setSubcategories(data)
@@ -126,10 +117,7 @@ const onDelete = (subCategorySlug) => {
   if(subCategorySlug == undefined || subCategorySlug == null){
     setSubcategoriesCard("")
   }else{
-    axios.defaults.headers = {
-      Authorization :  auth.token  
-    }
-    axios.post(`${host}/admin/store/subcategory/delete`,{
+    apiRequest.post(`/admin/store/subcategory/delete`,{
       slug : subCategorySlug
     })
     .then(res => {
@@ -189,10 +177,7 @@ const onSubmit = (data) =>{
     setOpen(true)
     return false
   }
-  axios.defaults.headers = {
-      Authorization : auth.token,
-  }
-  axios.post(host+"/admin/store/subcategory/add",data)
+  apiRequest.post("/admin/store/subcategory/add",data)
   .then(res => {
     setMessage(res.data.message)
     setFlag("success")

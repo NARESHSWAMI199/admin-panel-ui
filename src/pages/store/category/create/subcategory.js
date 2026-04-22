@@ -15,7 +15,7 @@ import { Box,
     Container,
     Stack
 } from "@mui/material";
-import axios from "axios";
+import { apiRequest } from "src/utils/api-request";
 import { useCallback, useEffect, useState } from "react";
 import { useAuth } from "src/hooks/use-auth";
 import { Layout as DashboardLayout } from 'src/layouts/dashboard/layout';
@@ -52,10 +52,7 @@ const generateThumbnail = (file) => {
 
 useEffect(() => {
     const getData = async () => {
-        axios.defaults.headers = {
-            Authorization: auth.token
-        }
-        await axios.get(host + "/admin/item/category")
+        await apiRequest.get("/admin/item/category")
             .then(res => {
                 const data = res.data;
                 setCategories(data)
@@ -100,11 +97,7 @@ useEffect(() => {
         subcategory : formData.get("subcategory"),
         icon : categoryIcon
       }
-
-    axios.defaults.headers = {
-        Authorization : auth.token,
-    }
-    axios.post(host+"/admin/item/subcategory/add",data)
+    apiRequest.post("/admin/item/subcategory/add",data)
     .then(res => {
       setMessage(res.data.message)
       setFlag("success")

@@ -1,7 +1,7 @@
 import ArrowDownOnSquareIcon from '@heroicons/react/24/solid/ArrowDownOnSquareIcon';
 import PlusIcon from '@heroicons/react/24/solid/PlusIcon';
 import { Alert, Box, Button, Container, Snackbar, Stack, SvgIcon } from '@mui/material';
-import axios from 'axios';
+import { apiRequest } from 'src/utils/api-request';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -13,7 +13,7 @@ import DialogFormForExcelImport from 'src/layouts/excel/import-excel';
 import { BasicSearch } from 'src/sections/basic-search';
 import { StoresCard } from 'src/sections/wholesale/stores-table';
 import { ItemsTable } from 'src/sections/wholesale/item-table';
-import { host, rowsPerPageOptions, toTitleCase } from 'src/utils/util';
+import { rowsPerPageOptions, toTitleCase } from 'src/utils/util';
 import { set } from 'nprogress';
 
 
@@ -68,10 +68,7 @@ const Page = () => {
     /** Get wholesale using user slug. */
     useEffect(() => {
         const updateStoreId = async () => {
-            axios.defaults.headers = {
-                Authorization: auth.token
-            }
-            await axios.get(host + '/admin/store/detailbyuser/' + userSlug)
+            await apiRequest.get('/admin/store/detailbyuser/' + userSlug)
                 .then(res => {
                     let store = res.data.res;
                     setWholesale(store)
@@ -93,10 +90,7 @@ const Page = () => {
     useEffect(() => {
         if(data.storeId === undefined || data.storeId === null) return;
         const getData = async () => {
-            axios.defaults.headers = {
-                Authorization: auth.token
-            }
-            await axios.post(host + "/admin/item/all", data)
+            await apiRequest.post("/admin/item/all", data)
                 .then(res => {
                     const data = res.data.content;
                     setTotalElements(res.data.totalElements)
@@ -117,10 +111,7 @@ const Page = () => {
 
     const importItemExcelSheet = async (formData) => {
         let success = false;
-        axios.defaults.headers = {
-          Authorization: auth.token
-        };
-        await axios.post(host + '/admin/item/importExcel/' + wholesale.slug, formData,{
+        await apiRequest.post('/admin/item/importExcel/' + wholesale.slug, formData,{
           headers: {
             'Content-Type': 'multipart/form-data'
           }
@@ -130,7 +121,7 @@ const Page = () => {
             setFlag("success");
             if(res.status === 201) {
                 let fileUrl = resData.fileUrl;
-                axios.get(fileUrl, { responseType: 'blob' })
+                apiRequest.get(fileUrl, { responseType: 'blob' })
                 .then(response => {
                     const url = window.URL.createObjectURL(new Blob([response.data], 
                         { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }));
@@ -176,10 +167,7 @@ const Page = () => {
     };
 
     const onStatusChange = (slug, status) => {
-        axios.defaults.headers = {
-            Authorization: auth.token
-        }
-        axios.post(host + `/admin/item/status`, {
+        apiRequest.post(`/admin/item/status`, {
             slug: slug,
             status: status
         })
@@ -227,10 +215,7 @@ const Page = () => {
 
 
     const onChangeInStock = (slug, inStock) => {
-        axios.defaults.headers = {
-            Authorization: auth.token
-        }
-        axios.post(host + `/admin/item/stock`, {
+        apiRequest.post(`/admin/item/stock`, {
             slug: slug,
             stock: inStock
         })
@@ -256,10 +241,7 @@ const Page = () => {
 
 
     const onDeleteStore = (slug) => {
-        axios.defaults.headers = {
-            Authorization: auth.token
-        }
-        axios.post(`${host}/admin/store/delete`,{
+        apiRequest.post(`/admin/store/delete`,{
             slug : slug
         })
             .then(res => {
@@ -277,10 +259,7 @@ const Page = () => {
 
 
     const onDelete = (slug) => {
-        axios.defaults.headers = {
-            Authorization: auth.token
-        }
-        axios.post(`${host}/admin/item/delete`,{
+        apiRequest.post(`/admin/item/delete`,{
             "slug" : slug
         })
         .then(res => {
@@ -342,11 +321,7 @@ const Page = () => {
         if (!confirmDownload) {
             return;
         }
-
-        axios.defaults.headers = {
-            Authorization: auth.token
-        }
-        await axios.post(host + '/admin/item/exportExcel/' + wholesale.slug, {...data, size: totalElements}, { responseType: 'blob' })
+        await apiRequest.post('/admin/item/exportExcel/' + wholesale.slug, {...data, size: totalElements}, { responseType: 'blob' })
             .then(response => {
                 const url = window.URL.createObjectURL(new Blob([response.data], 
                     { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }));

@@ -17,7 +17,7 @@ import { Box,
     Container,
     Stack
 } from "@mui/material";
-import axios from "axios";
+import { apiRequest } from "src/utils/api-request";
 import { useCallback, useEffect, useState } from "react";
 import { useAuth } from "src/hooks/use-auth";
 import { Layout as DashboardLayout } from 'src/layouts/dashboard/layout';
@@ -81,10 +81,7 @@ const [values,setValues] = useState({})
         icon : categoryIcon
       }
 
-    axios.defaults.headers = {
-        Authorization : auth.token,
-    }
-    axios.post(host+"/admin/store/category/add",data)
+    apiRequest.post("/admin/store/category/add",data)
     .then(res => {
       setMessage(res.data.message)
       setFlag("success")

@@ -7,9 +7,9 @@ import { OverviewLatestStores } from 'src/sections/overview/overview-latest-stor
 import { OverviewStores } from 'src/sections/overview/overview-sales';
 import { OverviewTraffic } from 'src/sections/overview/overview-traffic';
 import { useCallback, useEffect, useState } from 'react';
-import axios from 'axios';
+import { apiRequest } from 'src/utils/api-request';
 import { useAuth } from 'src/hooks/use-auth';
-import { host, suId } from 'src/utils/util';
+import { suId } from 'src/utils/util';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 
@@ -41,10 +41,7 @@ const Page = (props) => {
   // Getting All Stores 
   useEffect(() => {
     const getData = async () => {
-      axios.defaults.headers = {
-        Authorization: auth.token
-      }
-      await axios.post(host + "/admin/store/all", {})
+      await apiRequest.post("/admin/store/all", {})
         .then(res => {
           const data = res.data.content;
           setWholesales(data);
@@ -59,10 +56,7 @@ const Page = (props) => {
 
   // Get current year store count
   useEffect(() => {
-    axios.defaults.headers = {
-      Authorization: auth.token
-    }
-    axios.post(host + "/admin/dashboard/graph/months/", {
+    apiRequest.post("/admin/dashboard/graph/months/", {
       "year": currentYear
     })
       .then(res => {
@@ -86,10 +80,7 @@ const Page = (props) => {
 
   // Get store count of last year
   useEffect(() => {
-    axios.defaults.headers = {
-      Authorization: auth.token
-    }
-    axios.post(host + "/admin/dashboard/graph/months/", {
+    apiRequest.post("/admin/dashboard/graph/months/", {
       "year": currentYear - 1
     })
       .then(res => {
@@ -109,10 +100,7 @@ const Page = (props) => {
   // Get all basics counts 
   useEffect(() => {
     const getData = async () => {
-      axios.defaults.headers = {
-        Authorization: auth.token
-      }
-      await axios.get(host + "/admin/dashboard/counts")
+      await apiRequest.get("/admin/dashboard/counts")
         .then(res => {
           const data = res.data;
           setDashboardData(data)
@@ -133,10 +121,7 @@ const Page = (props) => {
   // Getting All Stores 
   useEffect(() => {
     const getData = async () => {
-      axios.defaults.headers = {
-        Authorization: auth.token
-      }
-      await axios.post(host + "/admin/auth/A/all", {})
+      await apiRequest.post("/admin/auth/A/all", {})
         .then(res => {
           const data = res.data.content;
           setAllUsers(data);

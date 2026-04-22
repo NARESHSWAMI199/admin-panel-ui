@@ -13,7 +13,7 @@ import {
   Stack,
   TextField
 } from "@mui/material";
-import axios from "axios";
+import { apiRequest } from "src/utils/api-request";
 import { useRouter } from "next/router";
 import { useCallback, useEffect, useState } from "react";
 import { useAuth } from "src/hooks/use-auth";
@@ -41,10 +41,7 @@ const [values,setValues] = useState({})
 
 useEffect(() => {
     const getData = async () => {
-        axios.defaults.headers = {
-            Authorization: auth.token
-        }
-        await axios.get(host + "/admin/store/category/"+categoryId)
+        await apiRequest.get("/admin/store/category/"+categoryId)
             .then(res => {
                 const data = res.data;
                 categoryIcon = data.icon
@@ -106,11 +103,7 @@ useEffect(() => {
         category : formData.get("category"),
         icon : categoryIcon
       }
-
-    axios.defaults.headers = {
-        Authorization : auth.token,
-    }
-    axios.post(host+"/admin/store/category/add",data)
+    apiRequest.post("/admin/store/category/add",data)
     .then(res => {
       setMessage(res.data.message)
       setFlag("success")

@@ -6,8 +6,8 @@ import { Layout as DashboardLayout } from 'src/layouts/dashboard/layout';
 import { CustomersTable } from 'src/sections/customer/customers-table';
 import { BasicSearch, CustomersSearch } from 'src/sections/basic-search';
 import { applyPagination } from 'src/utils/apply-pagination';
-import axios from 'axios';
-import { host, rowsPerPageOptions } from 'src/utils/util';
+import { apiRequest } from 'src/utils/api-request';
+import { rowsPerPageOptions } from 'src/utils/util';
 import { useAuth } from 'src/hooks/use-auth';
 import { CustomerHeaders } from 'src/sections/customer/customers-header';
 import { ArrowButtons } from 'src/layouts/arrow-button';
@@ -70,10 +70,7 @@ const Page = () => {
 
   useEffect( ()=>{
     const getData = async () => {
-       axios.defaults.headers = {
-         Authorization : auth.token
-       }
-       await axios.post(host+"/admin/auth/W/all",data)
+       await apiRequest.post("/admin/auth/W/all",data)
        .then(res => {
           const data = res.data.content;
            setTotalElements(res.data.totalElements)
@@ -92,10 +89,7 @@ const Page = () => {
 
 
   const onStatusChange = (slug,status) => {
-    axios.defaults.headers = {
-      Authorization :  auth.token  
-    }
-    axios.post(host+`/admin/auth/status`,{
+    apiRequest.post(`/admin/auth/status`,{
       slug : slug,
       status : status
     })
@@ -132,10 +126,7 @@ const Page = () => {
 
   
   const onDelete = (slug) => {
-    axios.defaults.headers = {
-      Authorization :  auth.token  
-    }
-    axios.post(`${host}/admin/auth/delete`,{
+    apiRequest.post(`/admin/auth/delete`,{
       slug : slug
     })
     .then(res => {
