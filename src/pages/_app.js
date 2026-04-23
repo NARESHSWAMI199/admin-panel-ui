@@ -28,13 +28,11 @@ const ApiClientInitializer = ({ children }) => {
   const initializedRef = useRef(false);
 
   useEffect(() => {
-    // Initialize API client once auth is loaded - only once
-    if (!auth.isLoading && !initializedRef.current) {
+    // Initialize API client once auth is loaded
+    if (!auth.isLoading) {
       initializeApiClient(auth, router);
-      initializedRef.current = true;
     }
-  }, [auth.isLoading]); // Only depend on isLoading, not the entire auth object
-
+  }, [auth, router]);
   return children;
 };
 
