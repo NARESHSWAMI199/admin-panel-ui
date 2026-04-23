@@ -170,7 +170,6 @@ useEffect(()=>{
     .then(res => {
       setMessage(res.data.message)
       setFlag("success")
-      form.reset();
       reset()
       setOpen(true)
     }).catch(err=>{
@@ -188,7 +187,13 @@ useEffect(()=>{
    
 
 const reset = () =>{
-  setValues({})
+  setValues({
+    planName: '',
+    price: '',
+    discount: '',
+    months: '',
+    description: ''
+  })
 }
 
 
@@ -267,6 +272,7 @@ return ( <>
                         type="number"
                         onChange={handleChange}
                         required
+                        inputProps={{ min: 0 , max : 999999999}}
                         value={values.price}
                       />
                     </Grid>
@@ -282,6 +288,7 @@ return ( <>
                         name="discount"
                         type="number"
                         onChange={handleChange}
+                        inputProps={{min : 0}}
                         required
                         value={values.discount}
                       />
@@ -297,6 +304,7 @@ return ( <>
                         name="months"
                         type="number"
                         onChange={handleChange}
+                        inputProps={{ min: 0 , max : 120}}
                         required
                         value={values.months}
                       />
@@ -310,7 +318,6 @@ return ( <>
                         fullWidth
                         label="Description"
                         name="description"
-                        type="number"
                         onChange={handleChange}
                         required
                         multiline

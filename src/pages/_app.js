@@ -11,7 +11,7 @@ import { createTheme } from 'src/theme';
 import { createEmotionCache } from 'src/utils/create-emotion-cache';
 import 'simplebar-react/dist/simplebar.min.css';
 import { useAuth } from 'src/hooks/use-auth';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { initializeApiClient } from 'src/utils/api-client';
 
 const clientSideEmotionCache = createEmotionCache();
@@ -25,13 +25,15 @@ const SplashScreen = () => null;
 const ApiClientInitializer = ({ children }) => {
   const router = useRouter();
   const auth = useAuth();
+  const initializedRef = useRef(false);
 
   useEffect(() => {
-    // Initialize API client once auth is loaded
-    if (!auth.isLoading) {
+    // Initialize API client once auth is loaded - only once
+    if (!auth.isLoading && !initializedRef.current) {
       initializeApiClient(auth, router);
+      initializedRef.current = true;
     }
-  }, [auth, router]);
+  }, [auth.isLoading]); // Only depend on isLoading, not the entire auth object
 
   return children;
 };

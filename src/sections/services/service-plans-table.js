@@ -90,7 +90,7 @@ export const ServicePlansTable = (props) =>{
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {service.length > 0 ?
+                            {servicePlans.length > 0 ?
                             servicePlans.map((plan, index) => {
                                 const isSelected = selected.includes(plan.id);
                                 const createdAt = !!plan?.createdAt ? format(plan?.createdAt, 'dd/MM/yyyy') : '';

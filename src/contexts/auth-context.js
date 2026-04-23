@@ -188,9 +188,11 @@ export const AuthProvider = (props) => {
           paginations : paginations
         });
 
-        setTimeout(() => {
-          signOut()
-        }, 5 * 60 * 60* 1000)
+        // Optional: Auto-logout after 5 hours for security
+        // Uncomment if you want automatic session expiration
+        // setTimeout(() => {
+        //   signOut()
+        // }, 5 * 60 * 60 * 1000)
       })
       .catch(err => {
         const errorMessage = (!!err.response) ? err.response.data.message : err.message;

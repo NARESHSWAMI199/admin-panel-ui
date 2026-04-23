@@ -33,13 +33,9 @@ export const SideNav = (props) => {
 
 
   useEffect(()=>{
-    setUser(auth.user)
-  },[auth.user])
-
-
-  useEffect(()=>{
-    setUpdatedItems(items(user))
-  },[])
+    setUser(auth.user);
+    setUpdatedItems(items(auth.user));
+  }, [auth.user])
 
 
   // useEffect(()=>{

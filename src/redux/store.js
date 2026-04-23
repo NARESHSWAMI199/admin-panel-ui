@@ -1,19 +1,14 @@
-import { createStore,compose,applyMiddleware } from "redux";
+import { createStore, compose, applyMiddleware } from "redux";
 import authReducer from "./reducer/reducer";
 import thunk from "redux-thunk";
-import { useEffect, useState } from "react";
 
-function Store () {
-    
-const [composeEnhances,setComposeEnhances] =  useState(null)
-useEffect (async ()=>{
-    await setComposeEnhances(window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose)
-},[]) 
+// Get the Redux DevTools composer if available, otherwise use compose
+const composeEnhancers = 
+  typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+    ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+    : compose;
 
-return composeEnhances
-
-}
-
-export const store =  createStore(
-    authReducer, <Store/>,(applyMiddleware(thunk))
-)
+export const store = createStore(
+  authReducer,
+  composeEnhancers(applyMiddleware(thunk))
+);
