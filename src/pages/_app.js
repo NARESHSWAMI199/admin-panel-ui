@@ -25,7 +25,6 @@ const SplashScreen = () => null;
 const ApiClientInitializer = ({ children }) => {
   const router = useRouter();
   const auth = useAuth();
-  const initializedRef = useRef(false);
 
   useEffect(() => {
     // Initialize API client once auth is loaded
