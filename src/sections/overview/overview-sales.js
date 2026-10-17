@@ -91,8 +91,8 @@ const useChartOptions = (categories) => {
   };
 };
 
-export const OverviewStores = (props) => {
-  const { chartSeries, sx , categories } = props;
+export const OverviewGraph = (props) => {
+  const { chartSeries, sx , categories,title } = props;
   const chartOptions = useChartOptions(categories);
 
   return (
@@ -111,7 +111,7 @@ export const OverviewStores = (props) => {
             Sync
           </Button>
         )}
-        title="Stores"
+        title={title}
       />
       <CardContent>
         <Chart
@@ -140,7 +140,7 @@ export const OverviewStores = (props) => {
   );
 };
 
-OverviewStores.protoTypes = {
+OverviewGraph.protoTypes = {
   chartSeries: PropTypes.array.isRequired,
   sx: PropTypes.object
 };

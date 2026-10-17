@@ -29,3 +29,14 @@ export const toTitleCase = (str) => {
   export const projectName= "Swami Sales";
   export const rowsPerPageOptions=[10, 25 , 50]
   export const ruppeeIcon = "₹";
+  export const firebaseConfig = {
+    apiKey: "AIzaSyDus6j9avh8dbIHgGxzdZGbGwud5UbGDy4",
+    authDomain: "push-notifications-fd978.firebaseapp.com",
+    projectId: "push-notifications-fd978",
+    storageBucket: "push-notifications-fd978.firebasestorage.app",
+    messagingSenderId: "895756161037",
+    appId: "1:895756161037:web:82cccfdb045c0ac7ae4544",
+    measurementId: "G-SBLDLG9L7D",
+  };
+  export const VAPID_PUBLIC_KEY = "BLIFnA1FU1D1Ua58AaycAI_7OQ4O5irMO9clnHuZ8CSC2lj8lUSIkdAinSfi84Rs3oo7ok6W4rcEB2_zsYNQsV0"
+  

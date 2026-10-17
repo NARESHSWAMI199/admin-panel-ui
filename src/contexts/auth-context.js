@@ -1,6 +1,10 @@
 import { createContext, useContext, useEffect, useReducer, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { apiRequest } from 'src/utils/api-request';
+import { initializeApp } from "firebase/app";
+import { firebaseConfig, host, VAPID_PUBLIC_KEY } from 'src/utils/util';
+import { getMessaging, getToken, isSupported } from "firebase/messaging";
+import axios from 'axios';
 
 const HANDLERS = {
   INITIALIZE: 'INITIALIZE',
@@ -166,7 +170,6 @@ export const AuthProvider = (props) => {
     if (method == 'OTP') {
       endpoint = "/admin/auth/login/otp"
     }
-
     await apiRequest.post(endpoint, {
       email: email,
       password: password
@@ -187,7 +190,7 @@ export const AuthProvider = (props) => {
           payload: user,
           paginations : paginations
         });
-
+        generateDeviceFcmToken();
         // Optional: Auto-logout after 5 hours for security
         // Uncomment if you want automatic session expiration
         // setTimeout(() => {
@@ -263,6 +266,60 @@ export const AuthProvider = (props) => {
       paginations : preSavePaginations
     })
   
+  }
+
+const app = initializeApp(firebaseConfig);
+let messaging = null;
+if (typeof window !== "undefined") {
+  isSupported().then((supported) => {
+    if (supported) {
+      messaging = getMessaging(app);
+    } else {
+      console.log("Firebase Messaging is not supported on this network (HTTP).");
+    }
+  });
+}
+const generateDeviceFcmToken = async () => {
+   try {
+      const permission = await Notification.requestPermission();
+      if (permission === 'granted') {
+            console.log('Notification permission granted.');
+            if ('serviceWorker' in navigator) {
+              const registration = await navigator.serviceWorker.register('/firebase-messaging-sw.js', { 
+                scope: '/' 
+              });
+            
+            const currentToken = await getToken(messaging, { 
+                vapidKey: VAPID_PUBLIC_KEY,
+                serviceWorkerRegistration: registration
+            });
+            let fcmToken = window.sessionStorage.getItem("fcmToken");
+            if (currentToken != fcmToken) {
+                sendTokenToBE(currentToken);
+            } else {
+                console.log('No registration token available. Request permission to generate one.');
+            }
+        }
+
+      } else {
+          console.log('Unable to get permission to notify.');
+      }
+    } catch (error) {
+        console.error('An error occurred while retrieving token: ', error);
+    }
+}
+
+
+const sendTokenToBE = (fcmToken) =>{
+    apiRequest.post(`/admin/auth/fcmToken/register`,{
+      "fcmToken" : fcmToken
+    }).then(res => {
+    if (typeof window !== 'undefined') {
+      window.sessionStorage.setItem("fcmToken" , fcmToken);
+    }
+    }).catch(e => {
+      console.log(e);
+    })
   }
 
   return (

@@ -4,7 +4,7 @@ import { Layout as DashboardLayout } from 'src/layouts/dashboard/layout';
 import { OverviewUsers } from 'src/sections/overview/overview-users';
 import { OverviewLatestUsers } from 'src/sections/overview/overview-latest-users';
 import { OverviewLatestStores } from 'src/sections/overview/overview-latest-stores';
-import { OverviewStores } from 'src/sections/overview/overview-sales';
+import { OverviewGraph } from 'src/sections/overview/overview-sales';
 import { OverviewTraffic } from 'src/sections/overview/overview-traffic';
 import { useCallback, useEffect, useState } from 'react';
 import { apiRequest } from 'src/utils/api-request';
@@ -12,6 +12,7 @@ import { useAuth } from 'src/hooks/use-auth';
 import { suId } from 'src/utils/util';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import { set } from 'nprogress';
 
 
 
@@ -24,6 +25,10 @@ const Page = (props) => {
   const [users, setAllUsers] = useState([])
   const [currentYearDataMonths, setCurrentYearDataMonths] = useState([])
   const [lastYearDataMonths, setLastYearDataMonths] = useState([])
+
+  const [currentYearSalesPerformance, setCurrentYearSalesPerformance] = useState([])
+  const [lastYearSalesPerformance, setLastYearSalesPerformance] = useState([])
+
   const [years, setYears] = useState([])
   const [dashboardData, setDashboardData] = useState({
     users: {},
@@ -133,6 +138,26 @@ const Page = (props) => {
     getData();
 
   }, [])
+
+
+  // Get current year's sales performance 
+  useEffect(()=>{
+      const getSalesPerfomance = async () =>{
+        await apiRequest.get(`/admin/dashboard/sales/performance/${currentYear}`)
+        .then(res=>{
+          const months = res.data.res;
+          let counts = []
+          Object.keys(months).map(month => {
+            counts.push(months[month])
+          })
+          setCurrentYearSalesPerformance(counts);
+        })
+        .catch(err=>{
+          console.log(err)
+        })  
+      }
+      getSalesPerfomance();
+  },[])
 
 
 
@@ -282,11 +307,14 @@ const Page = (props) => {
               value="$15k"
             />
           </Grid>*/}
+
+          {/* Store count graph */}
           <Grid
-            xs={12}
-            lg={8}
+            xs={1}
+            lg={6}
           >
-            <OverviewStores
+            <OverviewGraph
+              title="Stores"
               chartSeries={[
                 {
                   name: 'This year',
@@ -301,6 +329,30 @@ const Page = (props) => {
               sx={{ height: '100%' }}
             />
           </Grid>
+
+      {/* Sales performance */}
+
+       <Grid
+            xs={12}
+            lg={6}
+          >
+            <OverviewGraph
+              title="Sales Performance"
+              chartSeries={[
+                {
+                  name: 'This year',
+                  data: currentYearSalesPerformance
+                },
+                {
+                  name: 'Last year',
+                  data: lastYearSalesPerformance
+                }
+              ]}
+              categories={years}
+              sx={{ height: '100%' }}
+            />
+          </Grid>
+
           <Grid
             xs={12}
             md={6}
