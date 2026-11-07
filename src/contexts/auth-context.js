@@ -15,20 +15,26 @@ const HANDLERS = {
 };
 
 let authToken = () => {
+  if (typeof window === 'undefined') return null;
+
   try {
     return window.sessionStorage.getItem('token');
   } catch (err) {
     console.error(err);
+    return null;
   }
 }
 
 let getUser = () => {
+  if (typeof window === 'undefined') return null;
+
   try {
     let user = window.sessionStorage.getItem('user');
     user = !!user ? JSON.parse(user) : null;
     return user
   } catch (err) {
     console.error(err);
+    return null;
   }
 }
 
