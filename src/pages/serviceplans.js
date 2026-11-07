@@ -45,7 +45,7 @@ const Page = () => {
                 setOpen(true);
             });
         // end here.
-    }, [data, page, rowsPerPage]);
+    }, [auth.token, data, page, rowsPerPage]);
 
 
     const updateStatusOnUi = (status, slug) => {
@@ -114,7 +114,7 @@ const Page = () => {
     const handlePageChange = useCallback(
         (event, value) => {
             setPage(value);
-            setData({ ...data, pageNumber: value })
+            setData((previous) => ({ ...previous, pageNumber: value }))
         },
         []
     );
@@ -154,7 +154,9 @@ const Page = () => {
                 onClose={handleClose}
                 key={'top' + 'right'}
             >
-                <Alert onClose={handleClose} severity={flag} sx={{ width: '100%' }}>
+                <Alert onClose={handleClose}
+severity={flag}
+sx={{ width: '100%' }}>
                     {message}
                 </Alert>
             </Snackbar>
@@ -168,7 +170,8 @@ const Page = () => {
                     py: 8,
                 }}
             >
-                    <Container maxWidth="xxl" sx={{
+                    <Container maxWidth="xxl"
+sx={{
                     px : {
                             xs : 1,
                             sm : 1,
@@ -178,7 +181,8 @@ const Page = () => {
                         } 
                     }}>
                     <Stack spacing={3}>
-                        <ServicePlansHeaders headerTitle={'Service Plans'} userType="W" />
+                        <ServicePlansHeaders headerTitle={'Service Plans'}
+userType="W" />
                         <BasicSearch onSearch={onSearch} />
                         <ServicePlansTable
                             count={totalElements}

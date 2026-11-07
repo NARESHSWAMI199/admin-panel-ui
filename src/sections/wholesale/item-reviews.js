@@ -80,7 +80,8 @@ export const ItemReviews = (props) => {
                         spacing={2}
                       >      
                  
-                    {!!itemReview.user?.avtar ? <Image src={userImage+itemReview.user?.slug+"/"+itemReview.avatar} style={{borderRadius : "50%" , width:"50px", height : "50px" }}/>  : 
+                    {!!itemReview.user?.avtar ? <Image src={userImage+itemReview.user?.slug+"/"+itemReview.avatar}
+style={{borderRadius : "50%" , width:"50px", height : "50px" }}/>  : 
                         <Avatar src={userImage+itemReview.userSlug+"/"+itemReview.user?.avatar} >
                           {getInitials(itemReview.user?.username)}
                         </Avatar>
@@ -100,7 +101,10 @@ export const ItemReviews = (props) => {
                         direction="row"
                         spacing={2}
                       >
-                        <Rating name="read-only" value={itemReview.rating} readOnly titleAccess="Rating" />
+                        <Rating name="read-only"
+value={itemReview.rating}
+readOnly
+titleAccess="Rating" />
                       </Stack>
                   </TableCell>
               
@@ -115,7 +119,8 @@ export const ItemReviews = (props) => {
               )})
             :
             <TableRow>
-              <TableCell colSpan={5} align="center">
+              <TableCell colSpan={5}
+align="center">
                 No Item Reviews Found
               </TableCell>
             </TableRow>

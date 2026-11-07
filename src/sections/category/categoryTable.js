@@ -134,7 +134,9 @@ export const CategoryTable = (props) => {
                         marginX : '5px',
                         color : 'Red'
                         
-                        } }  titleAccess='delete' onClick={(e)=>{
+                        } }
+titleAccess='delete'
+onClick={(e)=>{
                           setSlug(category.slug)
                           setRowIndex(index)
                           setMessage("We are going to delete this item category. if you agree press agree otherwise press disagree.")
@@ -168,10 +170,12 @@ export const CategoryTable = (props) => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button autoFocus onClick={handleClose}>
+          <Button autoFocus
+onClick={handleClose}>
             Disagree
           </Button>
-          <Button onClick={()=>takeAction(action)} autoFocus>
+          <Button onClick={()=>takeAction(action)}
+autoFocus>
             Agree
           </Button>
         </DialogActions>

@@ -59,8 +59,11 @@ export const BasicSearch = (props) => {
 
  return (<Card sx={{ p: 2 }}>
     <form onSubmit={(e)=>{handleSubmit(e)}}>
-    <Grid container spacing={1}>
-      <Grid item xs={12} md={2}>
+    <Grid container
+spacing={1}>
+      <Grid item
+xs={12}
+md={2}>
         <OutlinedInput
          onChange={handleChange}
         value={values.searchKey}
@@ -84,7 +87,9 @@ export const BasicSearch = (props) => {
    
 
       {/* { props.type !== "A" &&  props.type !== "item" && */}
-        <Grid item xs={12} md={2}>
+        <Grid item
+xs={12}
+md={2}>
       <OutlinedInput
             onChange={handleChange}
             value={values.slug}
@@ -110,7 +115,9 @@ export const BasicSearch = (props) => {
 
 
         { props.type === "A" && 
-            <Grid item xs={12} md={2}>
+            <Grid item
+xs={12}
+md={2}>
             <Select
               sx={{height:55}}
               fullWidth
@@ -129,7 +136,9 @@ export const BasicSearch = (props) => {
             </Grid>}
 
           {props.type !== "G" && 
-            <Grid item xs={12} md={2}>
+            <Grid item
+xs={12}
+md={2}>
           <Select
             fullWidth
             sx={{height:55}}
@@ -148,7 +157,9 @@ export const BasicSearch = (props) => {
 
 
         {props.type == "item" &&   
-          <Grid item xs={12} md={2}><Select
+          <Grid item
+xs={12}
+md={2}><Select
           sx={{height:55}}
           fullWidth
           labelId="demo-simple-select-label"
@@ -163,7 +174,9 @@ export const BasicSearch = (props) => {
           <MenuItem value={"N"}>Out of stock</MenuItem>
         </Select></Grid>}
 
-      <Grid item xs={12} md={2}>      
+      <Grid item
+xs={12}
+md={2}>      
         <TextField
           sx={{height:55}}
           fullWidth
@@ -180,7 +193,9 @@ export const BasicSearch = (props) => {
         />
         </Grid>
 
-      <Grid item xs={12} md={2}>  
+      <Grid item
+xs={12}
+md={2}>  
         <TextField
             sx={{height:55}}
             fullWidth
@@ -196,7 +211,9 @@ export const BasicSearch = (props) => {
             }}
           />
       </Grid>
-      <Grid item xs={6} md={1}>  
+      <Grid item
+xs={6}
+md={1}>  
         <Button type='submit'
           sx={{height:55, width : '100%'}}
           startIcon={(
@@ -208,8 +225,12 @@ export const BasicSearch = (props) => {
         </Button>
       </Grid>
 
-      <Grid item xs={6} md={1}>
-        <Button type='reset' onClick={resetFilters} sx={{height : 54,width: '100%',background:'red',mx:1}} 
+      <Grid item
+xs={6}
+md={1}>
+        <Button type='reset'
+onClick={resetFilters}
+sx={{height : 54,width: '100%',background:'red',mx:1}} 
           startIcon={(
               <SvgIcon fontSize="small">
                 <RefreshOutlined />

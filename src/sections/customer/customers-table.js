@@ -72,7 +72,7 @@ export const CustomersTable = (props) => {
 
   useEffect(() => {
     setItems((props.items).filter(customer => customer.slug != user.slug))
-  }, [props.items])
+  }, [props.items, user.slug])
 
 
 
@@ -133,7 +133,8 @@ export const CustomersTable = (props) => {
                       direction="row"
                       spacing={2}
                     >
-                      {!!customer.avatar ? <Image style={{ borderRadius: '50%', height: '50px', width: '50px' }} src={userImage + customer.slug + "/" + customer.avatar} /> :
+                      {!!customer.avatar ? <Image style={{ borderRadius: '50%', height: '50px', width: '50px' }}
+src={userImage + customer.slug + "/" + customer.avatar} /> :
 
                         <Avatar src={userImage + customer.avatar} >
                           {getInitials(customer.username)}
@@ -147,7 +148,9 @@ export const CustomersTable = (props) => {
                         }}
                         style={{ textDecoration: 'none' }}
                       >
-                        <Typography title="Edit Profile" variant="subtitle2" sx={{ color: "text.primary" }} >
+                        <Typography title="Edit Profile"
+variant="subtitle2"
+sx={{ color: "text.primary" }} >
                           {toTitleCase(customer.username)}
                         </Typography>
                       </Link>
@@ -162,8 +165,11 @@ export const CustomersTable = (props) => {
                   <TableCell>
                     {/* Facing issue with badges position so that's why se given  */}
                     <Box sx={{px : '28px'}}>
-                    {customer.userType === "R" && <Badge color="error" badgeContent={'Retailer'} sx={{}} />}
-                    {customer.userType === "SA" && <Badge color='warning' badgeContent={'Admin'} />}
+                    {customer.userType === "R" && <Badge color="error"
+badgeContent={'Retailer'}
+sx={{}} />}
+                    {customer.userType === "SA" && <Badge color='warning'
+badgeContent={'Admin'} />}
                     {customer.userType === "W" &&
                       <Link
                         href={{
@@ -171,19 +177,24 @@ export const CustomersTable = (props) => {
                           query: { userSlug: customer.slug },
                         }}
                       >
-                        <Badge color="info" title="Detailed View Of Store" badgeContent={'Wholesaler'} />
+                        <Badge color="info"
+title="Detailed View Of Store"
+badgeContent={'Wholesaler'} />
                       </Link>
                     }
 
-                    {customer.userType === "S" && <Badge color="primary" badgeContent={'Staff'} />}
+                    {customer.userType === "S" && <Badge color="primary"
+badgeContent={'Staff'} />}
                     </Box>
                   </TableCell>
                   {/* email */}
                   <TableCell>
-                    <Link title='Mail to' style={{
+                    <Link title='Mail to'
+style={{
                       textDecoration: 'none',
                       color: 'black' 
-                    }} href={"mailto:" + customer.email}>
+                    }}
+href={"mailto:" + customer.email}>
                       {customer.email}
                     </Link>
                   </TableCell>
@@ -201,7 +212,9 @@ export const CustomersTable = (props) => {
                       marginX: '2px',
                       color: 'Red'
 
-                    }} titleAccess='activate' onClick={(e) => {
+                    }}
+titleAccess='activate'
+onClick={(e) => {
                       setMessage("We are going to activate this user.")
                       setSlug(customer.slug)
                       setStatus('A')
@@ -214,7 +227,9 @@ export const CustomersTable = (props) => {
                         marginX: '2px',
                         color: 'Green'
 
-                      }} titleAccess='deactivate' onClick={(e) => {
+                      }}
+titleAccess='deactivate'
+onClick={(e) => {
                         setMessage("We are going to deactivate this user.")
                         setSlug(customer.slug)
                         setStatus('D')
@@ -300,7 +315,9 @@ export const CustomersTable = (props) => {
                       marginX: '5px',
                       color: 'Red'
 
-                    }} titleAccess='delete' onClick={(e) => {
+                    }}
+titleAccess='delete'
+onClick={(e) => {
                       setSlug(customer.slug)
                       setRowIndex(index)
                       setMessage("We are going to delete this user if user type is wholesaler then user's store will also delete. if you agree press agree otherwise press disagree.")
@@ -342,10 +359,12 @@ export const CustomersTable = (props) => {
         </DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button autoFocus onClick={handleClose}>
+        <Button autoFocus
+onClick={handleClose}>
           Disagree
         </Button>
-        <Button onClick={() => takeAction(action)} autoFocus>
+        <Button onClick={() => takeAction(action)}
+autoFocus>
           Agree
         </Button>
       </DialogActions>

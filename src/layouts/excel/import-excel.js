@@ -99,7 +99,8 @@ export default function DialogFormForExcelImport({ importExcelSheet }) {
         aria-labelledby="customized-dialog-title"
         open={open}
       >
-        <DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title">
+        <DialogTitle sx={{ m: 0, p: 2 }}
+id="customized-dialog-title">
           Import Items
         </DialogTitle>
         <IconButton
@@ -124,10 +125,12 @@ export default function DialogFormForExcelImport({ importExcelSheet }) {
           </Upload.Dragger>
         </DialogContent>
         <DialogActions>
-          <Button onClick={downloadTemplate} color="primary">
+          <Button onClick={downloadTemplate}
+color="primary">
             Download Template
           </Button>
-          <Button onClick={handleUpload} color="primary">
+          <Button onClick={handleUpload}
+color="primary">
             Upload Excel
           </Button>
         </DialogActions>

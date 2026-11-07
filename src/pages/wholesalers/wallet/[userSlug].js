@@ -60,19 +60,19 @@ const Page = () => {
         setFlag("error");
         setOpen(true);
       });
-  },[data,rowsPerPage, page]);
+  },[data,rowsPerPage, page, slug]);
 
 
 
-  const handleClose = useCallback(() => {
+  const handleClose = () => {
     setOpen(false);
-  });
+  };
 
 
   const handlePageChange = useCallback(
     (event, value) => {
       setPage(value);
-      setData({ ...data, pageNumber: value })
+      setData((previous) => ({ ...previous, pageNumber: value }))
     },
     []
   );
@@ -87,11 +87,15 @@ const Page = () => {
 
 
   return (
-    <Box component="main" sx={{ flexGrow: 1, py: 8 }}>
+    <Box component="main"
+sx={{ flexGrow: 1, py: 8 }}>
       <Container maxWidth="xxl">
         <Stack spacing={3}>
-          <Grid xs={12} md={6} lg={8}>
-            <Typography variant="h6" sx={{ color : 'text.muted' }}>
+          <Grid xs={12}
+md={6}
+lg={8}>
+            <Typography variant="h6"
+sx={{ color : 'text.muted' }}>
                 Current Wallet Balance: {(!!walletAmount ? walletAmount : 0) + " "+ruppeeIcon} 
             </Typography>
           <Box>
@@ -113,8 +117,13 @@ const Page = () => {
           </Box>
 
           </Grid>
-          <Snackbar anchorOrigin={{ vertical: 'top', horizontal: 'right' }} open={open} onClose={handleClose} key={'top' + 'right'}>
-            <Alert onClose={handleClose} severity={flag} sx={{ width: '100%' }}>
+          <Snackbar anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+open={open}
+onClose={handleClose}
+key={'top' + 'right'}>
+            <Alert onClose={handleClose}
+severity={flag}
+sx={{ width: '100%' }}>
               {message}
             </Alert>
           </Snackbar>

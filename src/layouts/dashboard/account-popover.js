@@ -62,7 +62,8 @@ export const AccountPopover = (props) => {
             href={{
               pathname : "/account"
             }}> 
-            <UserOutlined style={{marginRight : 5}} title='Edit profile' />
+            <UserOutlined style={{marginRight : 5}}
+title='Edit profile' />
             {!!user.username ? (user.username).toUpperCase() : ""}
           </Link>
      
@@ -80,7 +81,8 @@ export const AccountPopover = (props) => {
         }}
       >
         <MenuItem onClick={handleSignOut}>
-          <LogoutOutlined fontSize='35' style={{marginRight : 5}}/>
+          <LogoutOutlined fontSize='35'
+style={{marginRight : 5}}/>
           Sign out
         </MenuItem>
       </MenuList>

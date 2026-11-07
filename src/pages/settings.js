@@ -79,8 +79,10 @@ const Page = () => {
             Settings
           </Typography>
           {/* <SettingsNotifications /> */}
-            <SettingsPassword handleSubmit={handleSubmit} reset={reset} />
-            <PaginationSettings showError={showError} showSuccess={showSuccess}/>
+            <SettingsPassword handleSubmit={handleSubmit}
+reset={reset} />
+            <PaginationSettings showError={showError}
+showSuccess={showSuccess}/>
         </Stack>
       </Container>
     </Box>
@@ -90,7 +92,9 @@ const Page = () => {
         onClose={handleClose}
         key={'top' + 'right'}
       >
-        <Alert onClose={handleClose} severity={flag} sx={{ width: '100%' }}>
+        <Alert onClose={handleClose}
+severity={flag}
+sx={{ width: '100%' }}>
           {message}
         </Alert>
       </Snackbar>

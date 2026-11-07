@@ -81,7 +81,7 @@ const Page = (props) => {
           router.push("/auth/login")
         }
       })
-  }, [])
+  }, [auth, currentYear, router])
 
   // Get store count of last year
   useEffect(() => {
@@ -99,7 +99,7 @@ const Page = (props) => {
       .catch(err => {
         console.log(err)
       })
-  }, [])
+  }, [currentYear])
 
 
   // Get all basics counts 
@@ -157,7 +157,7 @@ const Page = (props) => {
         })  
       }
       getSalesPerfomance();
-  },[])
+  },[currentYear])
 
 
 
@@ -189,7 +189,8 @@ const Page = (props) => {
           >
             <Link href={{
               pathname: "/users"
-            }} style={{ textDecoration: 'none' }} > <OverviewUsers
+            }}
+style={{ textDecoration: 'none' }} > <OverviewUsers
                 title="USERS"
                 sx={{ height: '100%' }}
                 value={dashboardData.users}

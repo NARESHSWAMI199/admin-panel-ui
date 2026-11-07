@@ -24,7 +24,7 @@ const useCustomers = (content, page, rowsPerPage) => {
     () => {
       return applyPagination(content, page, rowsPerPage);
     },
-    [page, rowsPerPage]
+    [content, page, rowsPerPage]
   )
 };
 
@@ -85,7 +85,7 @@ const Page = () => {
     }
     getData();
 
-  }, [data])
+  }, [auth.token, data])
 
 
   const updateStatusOnUi = (status, slug) => {
@@ -197,7 +197,9 @@ const Page = () => {
         onClose={handleClose}
         key={'top' + 'right'}
       >
-        <Alert onClose={handleClose} severity={flag} sx={{ width: '100%' }}>
+        <Alert onClose={handleClose}
+severity={flag}
+sx={{ width: '100%' }}>
           {message}
         </Alert>
       </Snackbar>
@@ -213,7 +215,8 @@ const Page = () => {
           py: 8
         }}
       >
-            <Container maxWidth="xxl" sx={{
+            <Container maxWidth="xxl"
+sx={{
                     px : {
                             xs : 1,
                             sm : 1,
@@ -223,7 +226,8 @@ const Page = () => {
                         } 
             }}>
           <Stack spacing={3}>
-            <CustomerHeaders headerTitle={"Retailer"} userType="R" />
+            <CustomerHeaders headerTitle={"Retailer"}
+userType="R" />
             <BasicSearch onSearch={onSearch} />
 
             <CustomersTable

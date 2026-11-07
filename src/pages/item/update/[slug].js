@@ -83,7 +83,7 @@ const UpdateItem = () => {
         }
         getData();
 
-    }, [])
+    }, [auth.token, slug])
 
 
 
@@ -105,7 +105,7 @@ const UpdateItem = () => {
         }
         getData();
 
-    }, [])
+    }, [auth.token])
 
 
 
@@ -130,7 +130,7 @@ const UpdateItem = () => {
         if(values.category !=undefined){
             getSubcategory();
         }
-    }, [values.category])
+    }, [auth.token, values.category])
 
 
 
@@ -159,8 +159,7 @@ const UpdateItem = () => {
     );
 
 
-    const handleSubmit = useCallback(
-        (e) => {
+    const handleSubmit = (e) => {
             e.preventDefault()
             const form = e.target;
             const formData = new FormData(form)
@@ -199,11 +198,11 @@ const UpdateItem = () => {
                     setOpen(true)
                 })
 
-        })
+        }
 
-    const handleClose = useCallback(() => {
+    const handleClose = () => {
         setOpen(false)
-    })
+    };
 
 
     const onSubmit = (images) =>{
@@ -257,7 +256,9 @@ const UpdateItem = () => {
                             <Box sx={{
                                 my: 2
                             }}>
-                                <MultipleImageInput totalImage={5} onChange={onSubmit} avtars={avtars.length > 0 && avtars}/>
+                                <MultipleImageInput totalImage={5}
+onChange={onSubmit}
+avtars={avtars.length > 0 && avtars}/>
                             </Box>
 
                                 <Grid
@@ -329,7 +330,8 @@ const UpdateItem = () => {
                                         md={6}
                                     >
                                         <FormControl fullWidth>
-                                            <InputLabel style={{background :'white'}}  id="itemLabel">Category</InputLabel>
+                                            <InputLabel style={{background :'white'}}
+id="itemLabel">Category</InputLabel>
                                             <Select
                                                 labelId="itemLabel"
                                                 id="category"
@@ -339,7 +341,8 @@ const UpdateItem = () => {
                                             >
                                             {categories.map((categroyObj , i) => {
                                                 if(categroyObj?.id !=0)
-                                                return ( <MenuItem key={i} value={categroyObj?.id}>{categroyObj?.category}</MenuItem>
+                                                return ( <MenuItem key={i}
+value={categroyObj?.id}>{categroyObj?.category}</MenuItem>
                                                 )})
                                             }
                                             <MenuItem value={0}>{"Other"}</MenuItem>
@@ -354,7 +357,8 @@ const UpdateItem = () => {
                                         md={6}
                                     >
                                         <FormControl fullWidth>
-                                            <InputLabel style={{background :'white'}}  id="itemLabel">Subcategory</InputLabel>
+                                            <InputLabel style={{background :'white'}}
+id="itemLabel">Subcategory</InputLabel>
                                             <Select
                                                 labelId="itemLabel"
                                                 id="subcategory"
@@ -365,7 +369,8 @@ const UpdateItem = () => {
                                             >
                                             {subcategories.map((subcategroyObj , i) => {
                                                 if(subcategroyObj.id !=0)
-                                                return ( <MenuItem key={i} value={subcategroyObj?.id}>{subcategroyObj?.subcategory}</MenuItem>
+                                                return ( <MenuItem key={i}
+value={subcategroyObj?.id}>{subcategroyObj?.subcategory}</MenuItem>
                                                 )})
                                             }
                                              <MenuItem value={0}>{"Other"}</MenuItem>
@@ -418,7 +423,8 @@ const UpdateItem = () => {
                                         md={6}
                                     >
                                         <FormControl fullWidth>
-                                            <InputLabel style={{background :'white'}}  id="itemLabel">Label</InputLabel>
+                                            <InputLabel style={{background :'white'}}
+id="itemLabel">Label</InputLabel>
                                             <Select
                                                 labelId="itemLabel"
                                                 id="demo-simple-select"
@@ -457,7 +463,8 @@ const UpdateItem = () => {
            
 
                     <CardActions sx={{ justifyContent: 'flex-end' }}>
-                        <Button type="submit" variant="contained">
+                        <Button type="submit"
+variant="contained">
                             Save details
                         </Button>
                         
@@ -487,7 +494,9 @@ const UpdateItem = () => {
             onClose={handleClose}
             key={'top' + 'right'}
         >
-            <Alert onClose={handleClose} severity={flag} sx={{ width: '100%' }}>
+            <Alert onClose={handleClose}
+severity={flag}
+sx={{ width: '100%' }}>
                 {message}
             </Alert>
         </Snackbar>

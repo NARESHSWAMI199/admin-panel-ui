@@ -23,6 +23,7 @@ export const AccountProfile = (props) => {
   const createdAt = (!!user && !!user.createdAt) ?  format(user.createdAt, 'dd/MM/yyyy') : "";
   const auth = useAuth();
   const loggedUser = auth.user
+  const { updateUserDetail } = auth
   const [message , setMessage] = useState("")
   const [flag , setFlag] = useState("info")
   const [open , setOpen] = useState(false)
@@ -56,10 +57,10 @@ export const AccountProfile = (props) => {
   const handleUpdateLoggedUser = useCallback(
     (slug) => {
       if(loggedUser.slug === user.slug){
-        auth.updateUserDetail(slug)
+        updateUserDetail(slug)
       }
     },
-    [auth]
+    [loggedUser.slug, updateUserDetail, user.slug]
   );
 
 
@@ -78,7 +79,9 @@ export const AccountProfile = (props) => {
             onClose={handleClose}
             key={'top' + 'right'}
           >
-        <Alert onClose={handleClose} severity={flag} sx={{ width: '100%' }}>
+        <Alert onClose={handleClose}
+severity={flag}
+sx={{ width: '100%' }}>
             {message}
         </Alert>
         </Snackbar>
@@ -93,14 +96,16 @@ export const AccountProfile = (props) => {
                 }}
               >
 
-              { !!user.avatar ? <Image  style={{borderRadius : '50%', height : '80px', width : '80px'}} src={userImage+user.slug+"/"+user.avatar}/> :
+              { !!user.avatar ? <Image  style={{borderRadius : '50%', height : '80px', width : '80px'}}
+src={userImage+user.slug+"/"+user.avatar}/> :
 
               <Avatar sx={{
                 height: 80,
                 mb: 2,
                 width: 80,
                 objectFit :'contain'
-              }} src={userImage+user.avatar} >
+              }}
+src={userImage+user.avatar} >
                 {getInitials(user.username)}
               </Avatar>
               }
@@ -140,7 +145,11 @@ export const AccountProfile = (props) => {
                   onChange={(event) => uploadProfile(event)}
                 /> */}
                 
-              <input type='file' style={{display : "none"}} id="profileImage" accept='image/*'  onChange={(event) => uploadProfile(event)} />
+              <input type='file'
+style={{display : "none"}}
+id="profileImage"
+accept='image/*'
+onChange={(event) => uploadProfile(event)} />
               </Button>
               
             </CardActions>

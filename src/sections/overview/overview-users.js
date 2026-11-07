@@ -28,7 +28,7 @@ export const OverviewUsers = (props) => {
     }else{
       setTag('primary.main')
     }
-  },[tag])
+  },[title])
 
 
  

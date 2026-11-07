@@ -59,7 +59,7 @@ const Page = () => {
      }
     getData();
 
-   },[data])
+   },[auth.token, data])
 
 
   
@@ -100,7 +100,7 @@ const Page = () => {
   const handlePageChange = useCallback(
     (event, value) => {
       setPage(value);
-      setData({...data, pageNumber : value})
+      setData((previous) => ({...previous, pageNumber : value}))
     },
     []
   );
@@ -137,7 +137,9 @@ const Page = () => {
         onClose={handleClose}
         key={'top' + 'right'}
       >
-     <Alert onClose={handleClose} severity={flag} sx={{ width: '100%' }}>
+     <Alert onClose={handleClose}
+severity={flag}
+sx={{ width: '100%' }}>
         {message}
     </Alert>
     </Snackbar>
@@ -153,7 +155,8 @@ const Page = () => {
           py: 5,
         }}
       >
-            <Container maxWidth="xxl" sx={{
+            <Container maxWidth="xxl"
+sx={{
                     px : {
                             xs : 1,
                             sm : 1,
@@ -163,7 +166,8 @@ const Page = () => {
                         } 
             }}>
             <Stack spacing={3}>
-              <CustomerHeaders  headerTitle={"All Store"} userType="W" />
+              <CustomerHeaders  headerTitle={"All Store"}
+userType="W" />
               <BasicSearch onSearch={onSearch} />
             <Spinner show={showSpinner}/>
             {stores.map((store,i) =>{
@@ -178,7 +182,10 @@ const Page = () => {
                           ...data,
                           pageNumber : page-1
                           }
-                        )}  align="center" defaultCurrent={1} total={totalPages*10} />  
+                        )}
+align="center"
+defaultCurrent={1}
+total={totalPages*10} />  
                 </Box>
             </Stack>
         </Container>

@@ -2,7 +2,7 @@ import { Alert, Box, Button, Card, CardActions, CardContent, CardHeader, Contain
 import { Typography } from 'antd';
 import axios from 'axios';
 import { saveAs } from 'file-saver';
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 import { useAuth } from 'src/hooks/use-auth';
 import { Layout as DashboardLayout } from 'src/layouts/dashboard/layout';
 import ImageInput from "src/sections/image-input";
@@ -23,12 +23,11 @@ const Page = () => {
     const [showSpinner , setShowSpinner] = useState("none")
 
 
-    const handleSubmit = useCallback(
-       async (e) => {
+    const handleSubmit = async (e) => {
             e.preventDefault()
             let data = {
                 image : values.image
-            }
+            };
             axios.defaults.headers = {
                 Authorization: auth.token,
                 "Content-Type" : "multipart/form-data"
@@ -61,7 +60,7 @@ const Page = () => {
                 setShowSpinner("none")
             })
         
-        })
+        }
 
 
     /** for snackbar close */
@@ -92,7 +91,9 @@ const Page = () => {
                 onClose={handleClose}
                 key={'top' + 'right'}
             >
-                <Alert onClose={handleClose} severity={flag} sx={{ width: '100%' }}>
+                <Alert onClose={handleClose}
+severity={flag}
+sx={{ width: '100%' }}>
                     {message}
                 </Alert>
             </Snackbar>
@@ -110,7 +111,8 @@ const Page = () => {
                 <Stack spacing={3}>
 
                     <Box>
-                        <ImageInput  totalImage = {1} onChange={onSubmit} />
+                        <ImageInput  totalImage = {1}
+onChange={onSubmit} />
                         <Typography variant="p">
                             Upload image here
                         </Typography>
@@ -123,10 +125,13 @@ const Page = () => {
                         justifyContent : 'center',
                         alignItems : 'center'
                     }} >
-                        <img width='500px'  style={{
+                        <img width='500px'
+style={{
                             objectFit : 'contain',
-                        }} src={imageUrl}/>
-                        <Typography variant="b" style={{my: 2}}>
+                        }}
+src={imageUrl}/>
+                        <Typography variant="b"
+style={{my: 2}}>
                             Note : If your processed image loosing opacity. you should need incress background size
                         </Typography>
                     </Box>  : ''
@@ -136,11 +141,16 @@ const Page = () => {
             </CardContent>
             <Divider />
                 <CardActions sx={{ justifyContent: 'flex-end' }}>
-                        <Button type="submit" variant="contained" onClick={handleSubmit}>
+                        <Button type="submit"
+variant="contained"
+onClick={handleSubmit}>
                             Remove Background
                         </Button>
                         {showPreview ? 
-                        <Button type="submit" variant="contained" sx={{background:'green'}}  onClick={downloadImage}>
+                        <Button type="submit"
+variant="contained"
+sx={{background:'green'}}
+onClick={downloadImage}>
                             Download Image
                         </Button> :''
                         }

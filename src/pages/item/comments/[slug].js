@@ -78,7 +78,7 @@ const Page = () => {
             .then(res => {
                 const result = res.data.res;
                 setItem(result)
-                setData({...data, itemId : result.id,})
+                setData((previous) => ({...previous, itemId : result.id}))
             })
             .catch(err => {
                 setMessage(!!err.response ? err.response.data.message : err.message)
@@ -88,7 +88,7 @@ const Page = () => {
     }
     getData();
 
-}, [])
+}, [auth.token, slug])
 
 
 // Getting item reviews */
@@ -112,7 +112,7 @@ useEffect( ()=>{
      }
     getData();
 
-   },[data])
+   },[auth.token, data, item.id])
 
 
 
@@ -137,7 +137,7 @@ useEffect( ()=>{
    }
   getData();
 
- },[data])
+ },[auth.token, data])
 
 
 
@@ -187,7 +187,9 @@ useEffect( ()=>{
         onClose={handleClose}
         key={'top' + 'right'}
       >
-     <Alert onClose={handleClose} severity={flag} sx={{ width: '100%' }}>
+     <Alert onClose={handleClose}
+severity={flag}
+sx={{ width: '100%' }}>
         {message}
     </Alert>
     </Snackbar>
@@ -209,7 +211,9 @@ useEffect( ()=>{
           <Card>
             <CardContent>
               <Grid container>
-                  <Grid item xs={12} md={3}> 
+                  <Grid item
+xs={12}
+md={3}> 
 
                     {/* image carousel */}
                       <Carousel style={{
@@ -232,7 +236,9 @@ useEffect( ()=>{
                   </Grid>
 
                   {/* item Detail */}
-                    <Grid item xs={12} md={6} 
+                    <Grid item
+xs={12}
+md={6} 
                           sx={{
                             display : 'flex',
                             flexDirection : 'column',
@@ -242,7 +248,8 @@ useEffect( ()=>{
                       >
             
                       <Box sx={{ textAlign : 'left',}}>
-                          <Typography component="div" variant="h5">
+                          <Typography component="div"
+variant="h5">
                               {toTitleCase(item.name)}
                           </Typography>
                           <Typography
@@ -314,8 +321,11 @@ useEffect( ()=>{
                               sx={{ color: 'text.secondary', fontSize: 15, my: 1 }}
                           >
                   
-                              <Grid container spacing={2}>
-                                  <Grid item xs={6} md={6}>
+                              <Grid container
+spacing={2}>
+                                  <Grid item
+xs={6}
+md={6}>
                                       <div style={{
                                       display: 'flex',
                                       alignItems: 'center',
@@ -336,8 +346,11 @@ useEffect( ()=>{
                                   component="div"
                                   sx={{ color: 'text.secondary', fontSize: 15, my: 1 }}
                               >
-                              <Grid container spacing={2}>
-                                  <Grid item xs={6} md={6}>
+                              <Grid container
+spacing={2}>
+                                  <Grid item
+xs={6}
+md={6}>
                                       <div style={{
                                         display: 'flex'
                                       }}>
@@ -358,7 +371,9 @@ useEffect( ()=>{
                           </Typography>
 
                         <Box sx={{display : 'flex', alignItems : 'center',my:1}}>
-                          <Rating readOnly value={parseFloat(item.rating)} sx={{mx : 1}}/>
+                          <Rating readOnly
+value={parseFloat(item.rating)}
+sx={{mx : 1}}/>
                             <Typography>
                                   {item.totalRatingCount} Ratings
                             </Typography>
@@ -382,7 +397,9 @@ useEffect( ()=>{
                   </Grid>
 
 
-                 <Grid item xs={12} md={2} 
+                 <Grid item
+xs={12}
+md={2} 
                   style={{
                     display : "flex",
                     justifyContent : 'flex-end',
@@ -398,7 +415,8 @@ useEffect( ()=>{
                             color:'#6C737F',
                           }}
                         >
-                          <Button variant='outlined' icon> <Typography>
+                          <Button variant='outlined'
+icon> <Typography>
                             Edit
                           </Typography> </Button>
                       </Link>         
@@ -422,13 +440,20 @@ useEffect( ()=>{
                   onChange={handleChange}
                   aria-label="icon tabs example"
                 >
-                <Tab icon={<CommentIcon />} aria-label="comments" {...a11yProps(0)}  label="COMMENTS" />
-                <Tab icon={<ReportIcon />} aria-label="comments"  {...a11yProps(1)} label= "REPORTS"  />
+                <Tab icon={<CommentIcon />}
+aria-label="comments"
+{...a11yProps(0)}
+label="COMMENTS" />
+                <Tab icon={<ReportIcon />}
+aria-label="comments"
+{...a11yProps(1)}
+label= "REPORTS"  />
               </Tabs>
           </Box>
 
             {/* Comments and reviews */}
-            <TabPanel value={value} index={0}>
+            <TabPanel value={value}
+index={0}>
              {/* Item Reviews */}
              <Box>
                 <ItemReviews 
@@ -443,7 +468,8 @@ useEffect( ()=>{
               </Box>
             </TabPanel>
 
-            <TabPanel value={value} index={1}>
+            <TabPanel value={value}
+index={1}>
             {/* Item Reports */}
               <Box>
                 <ItemReports 

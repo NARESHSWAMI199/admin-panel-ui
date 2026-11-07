@@ -80,7 +80,7 @@ const Page = () => {
                 })
         }
         updateStoreId()
-    }, [])
+    }, [userSlug])
 
 
 
@@ -354,7 +354,9 @@ const Page = () => {
                 onClose={handleClose}
                 key={'top' + 'right'}
             >
-                <Alert onClose={handleClose} severity={flag} sx={{ width: '100%' }}>
+                <Alert onClose={handleClose}
+severity={flag}
+sx={{ width: '100%' }}>
                     {message}
                 </Alert>
             </Snackbar>
@@ -364,7 +366,9 @@ const Page = () => {
                 onClose={handleSnackbarClose}
                 message="Some items were not updated. Click to view."
                 action={
-                    <Button color="secondary" size="small" onClick={handleDownload}>
+                    <Button color="secondary"
+size="small"
+onClick={handleDownload}>
                         VIEW
                     </Button>
                 }
@@ -382,7 +386,8 @@ const Page = () => {
                     py :8
                 }}
             >
-                 <Container maxWidth="xxl" sx={{
+                 <Container maxWidth="xxl"
+sx={{
                     px : {
                             xs : 1,
                             sm : 1,
@@ -393,7 +398,11 @@ const Page = () => {
                     }}>
                     <Stack spacing={3}>
 
-                        <StoresCard showVisitButton={false} deleteStore={onDeleteStore} store={wholesale} visit={false} delete={false} />
+                        <StoresCard showVisitButton={false}
+deleteStore={onDeleteStore}
+store={wholesale}
+visit={false}
+delete={false} />
 
                         <Stack
                             direction="row"
@@ -444,7 +453,8 @@ const Page = () => {
 
                         
                     
-                        <BasicSearch onSearch={onSearch} type="item" />
+                        <BasicSearch onSearch={onSearch}
+type="item" />
                         <ItemsTable
                             count={totalElements}
                             items={items}

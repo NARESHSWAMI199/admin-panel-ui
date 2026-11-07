@@ -86,7 +86,8 @@ export const SideNav = (props) => {
               p: '12px'
             }}
           >
-            <Link style={{textDecoration:'white', color:'white'}} href={'/'}>
+            <Link style={{textDecoration:'white', color:'white'}}
+href={'/'}>
             <div>
               <Typography
                 color="inherit"

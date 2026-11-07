@@ -247,7 +247,8 @@ const Page = (props) => {
                      type="email"
                    
                    />
-                  <Spin size='large' style={{display : showSpinner ? 'block' : 'none' ,marginTop : 20}} />
+                  <Spin size='large'
+style={{display : showSpinner ? 'block' : 'none' ,marginTop : 20}} />
                    {!showOtpInput ? 
                     <Button
                         fullWidth
@@ -295,7 +296,9 @@ const Page = (props) => {
         onClose={handleClose}
         key={'top' + 'right'}
       >
-      <Alert onClose={handleClose} severity={flag} sx={{ width: '100%' }}>
+      <Alert onClose={handleClose}
+severity={flag}
+sx={{ width: '100%' }}>
           {message}
       </Alert>
     </Snackbar>

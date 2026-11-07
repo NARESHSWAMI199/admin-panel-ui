@@ -71,7 +71,7 @@ export const GroupTable = (props) => {
      }
     getData();
 
-   },[])
+   },[user.slug])
 
 
   useEffect(()=>{
@@ -189,7 +189,9 @@ export const GroupTable = (props) => {
                         marginX : '5px',
                         color : 'Red'
                         
-                        } }  titleAccess='delete' onClick={(e)=>{
+                        } }
+titleAccess='delete'
+onClick={(e)=>{
                           setSlug(group.slug)
                           setRowIndex(index)
                           setMessage("We are going to delete this group. if you agree press agree otherwise press disagree.")
@@ -231,10 +233,12 @@ export const GroupTable = (props) => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button autoFocus onClick={handleClose}>
+          <Button autoFocus
+onClick={handleClose}>
             Disagree
           </Button>
-          <Button onClick={()=>takeAction(action)} autoFocus>
+          <Button onClick={()=>takeAction(action)}
+autoFocus>
             Agree
           </Button>
         </DialogActions>

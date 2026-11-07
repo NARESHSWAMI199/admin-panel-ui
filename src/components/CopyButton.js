@@ -17,7 +17,9 @@ const CopyButton = ({ text, children }) => {
   return (
     <>
       {isCopied ? (
-        <Badge color="primary" badgeContent="copied" style={{ marginBottom: '35px' }} />
+        <Badge color="primary"
+badgeContent="copied"
+style={{ marginBottom: '35px' }} />
       ) : (
         <></>
       )}

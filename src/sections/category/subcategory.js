@@ -56,8 +56,7 @@ const confirmBox = () => {
 };
 
 
-  const handleSubmit = useCallback(
-    (e) =>{
+  const handleSubmit = (e) => {
     e.preventDefault()
     const form = e.target;
     const formData = new FormData(form)
@@ -70,7 +69,7 @@ const confirmBox = () => {
         }
         props.onSubmit(data)
         categoryIcon = null
-    })
+    }
 
 
 const generateThumbnail = (file) => {
@@ -92,7 +91,8 @@ return (<>
 <Card sx={{
   width : '100%',
 }}>
-    <form autoComplete="off" onSubmit={handleSubmit}>
+    <form autoComplete="off"
+onSubmit={handleSubmit}>
       <Box sx={{display : 'flex', flexDirection : 'row', flex : 1}}>
         <Box>
           <CardHeader
@@ -113,7 +113,11 @@ return (<>
         </Box>
     <CardContent>
     <Box>
-    <Grid xs={12} md={12} container spacing={3} style={{
+    <Grid xs={12}
+md={12}
+container
+spacing={3}
+style={{
       margin : 'auto'
     }}>
         <Grid
@@ -124,7 +128,8 @@ return (<>
             }}
             >
           <Box>
-              <ImageInput onChange={onSubmit} avtar =  {values.icon }/>
+              <ImageInput onChange={onSubmit}
+avtar =  {values.icon }/>
           </Box>
         </Grid>
         <Grid
@@ -151,7 +156,8 @@ return (<>
                 }}
             >
                 <FormControl fullWidth>
-                    <InputLabel sx={{background : 'white'}} id="itemLabel">Unit</InputLabel>
+                    <InputLabel sx={{background : 'white'}}
+id="itemLabel">Unit</InputLabel>
                     <Select
                         labelId="itemLabel"
                         id="unit"
@@ -160,7 +166,8 @@ return (<>
                         onChange={handleChange}
                     >
                     {units.map((unitObj , i) => {
-                        return ( <MenuItem key={i} value={unitObj.unit}>{unitObj.unit}</MenuItem>
+                        return ( <MenuItem key={i}
+value={unitObj.unit}>{unitObj.unit}</MenuItem>
                       )})
                     }
                     </Select>
@@ -171,7 +178,9 @@ return (<>
     </Box>
     </CardContent>
       <CardActions sx={{ justifyContent: 'center' }}>
-      <Button style={{width : '100%'}} type="submit" variant="contained">
+      <Button style={{width : '100%'}}
+type="submit"
+variant="contained">
           {props.buttonLabel ==null || props.buttonLabel == undefined ? "Save" : props.buttonLabel}
       </Button>
       </CardActions>
@@ -194,10 +203,12 @@ return (<>
         </DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button autoFocus onClick={handleClose}>
+        <Button autoFocus
+onClick={handleClose}>
           Disagree
         </Button>
-        <Button onClick={()=>takeAction(action)} autoFocus>
+        <Button onClick={()=>takeAction(action)}
+autoFocus>
           Agree
         </Button>
       </DialogActions>

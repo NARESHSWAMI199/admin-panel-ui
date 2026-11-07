@@ -76,7 +76,7 @@ const Page = () => {
      }
     getData();
 
-   },[data,page,rowsPerPage])
+   },[auth.token, data, page, rowsPerPage, userType])
 
 
 
@@ -151,7 +151,7 @@ const Page = () => {
   const handlePageChange = useCallback(
     (event, value) => {
       setPage(value);
-      setData({...data, pageNumber : value})
+      setData((previous) => ({...previous, pageNumber : value}))
     },
     []
   );
@@ -197,7 +197,9 @@ const Page = () => {
         onClose={handleClose}
         key={'top' + 'right'}
       >
-     <Alert onClose={handleClose} severity={flag} sx={{ width: '100%' }}>
+     <Alert onClose={handleClose}
+severity={flag}
+sx={{ width: '100%' }}>
         {message}
     </Alert>
     </Snackbar>
@@ -219,7 +221,8 @@ const Page = () => {
                 }}>
           <Stack spacing={3}>
         
-          <CustomerHeaders  headerTitle={"Admins"} userType={userType} />
+          <CustomerHeaders  headerTitle={"Admins"}
+userType={userType} />
             <BasicSearch  onSearch={onSearch} />
 
              <CustomersTable

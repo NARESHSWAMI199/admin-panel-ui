@@ -41,9 +41,9 @@ export const StoresCard = (props) => {
 
   useEffect(()=>{
     setStore(props.store)
-    setStatus(store.status)
-    setSlug(store.slug)
-  },[props])
+    setStatus(props.store.status)
+    setSlug(props.store.slug)
+  },[props.store])
 
   const updateStatus = (slug,status) => {
     axios.defaults.headers = {
@@ -118,9 +118,11 @@ export const StoresCard = (props) => {
   },[])
 
   return (<>
-  <Grid container sx={{boxShadow : 1 , borderRadius : 1}}>
+  <Grid container
+sx={{boxShadow : 1 , borderRadius : 1}}>
       
-          <Grid xs={12} md={2} 
+          <Grid xs={12}
+md={2} 
           sx={{
             display : 'flex' , 
             justifyContent : 'center' , 
@@ -140,7 +142,9 @@ export const StoresCard = (props) => {
            </ImageContainer>
           </Grid>
 
-          <Grid xs={12} md={8} sx={{
+          <Grid xs={12}
+md={8}
+sx={{
                 display : 'flex' , 
                 flexDirection: 'column', 
                 justifyContent : 'center' , 
@@ -152,8 +156,11 @@ export const StoresCard = (props) => {
                 justifyContent : 'center',
                 textAlign : 'left' 
                 }}>
-                <Typography component="div" variant="h5">
-                  <Link title='Store Detail' style={{textDecoration : 'none' , color : 'black'}} href={"/store/"+ store.user?.slug}>
+                <Typography component="div"
+variant="h5">
+                  <Link title='Store Detail'
+style={{textDecoration : 'none' , color : 'black'}}
+href={"/store/"+ store.user?.slug}>
                     {toTitleCase(store.storeName)}
                   </Link>
                 </Typography>
@@ -202,7 +209,8 @@ export const StoresCard = (props) => {
                   }}>
                 
                     <PersonIcon sx={{ mr: 1 }} />
-                    <Link style={{textDecoration : 'none' , color : '#6C737F'}} href={"/wholesalers/"+store.user?.slug}>
+                    <Link style={{textDecoration : 'none' , color : '#6C737F'}}
+href={"/wholesalers/"+store.user?.slug}>
                     <span title='Check user Detail' >{toTitleCase(store.user?.username)}</span>
                     </Link>
                   </div> 
@@ -237,7 +245,8 @@ export const StoresCard = (props) => {
                     textDecoration : 'none'
                   }}>
                     <EmailOutlinedIcon sx={{ padding: 0.3, mr: 1 }}/>
-                      <Link href={"mailto:" + store.email} style={{ textDecoration: 'none' }}> {store.email}</Link>
+                      <Link href={"mailto:" + store.email}
+style={{ textDecoration: 'none' }}> {store.email}</Link>
 
                   </div>  
                 </Typography>
@@ -260,23 +269,34 @@ export const StoresCard = (props) => {
                   </div>  
                 </Typography>
 
-                <Rating readOnly={true} value={store.rating} sx={{my:1}}/>
+                <Rating readOnly={true}
+value={store.rating}
+sx={{my:1}}/>
               </CardContent>
           </Grid>
 
 
-          <Grid xs={12} md={1.2} >
+          <Grid xs={12}
+md={1.2} >
               <Box sx={{ display: 'flex', flexDirection: 'column', height : '100%', justifyContent : 'center'}}>
                 { status !== 'A' ?
-                <Button  type='primary' variant="outlined" icon={<CheckCircleOutlined />} style={{background:'#5cb85c'}} onClick={(e)=> {
+                <Button  type='primary'
+variant="outlined"
+icon={<CheckCircleOutlined />}
+style={{background:'#5cb85c'}}
+onClick={(e)=> {
                                   confirmBox("We are going to activate this store.","status",store.slug)
                                 }} >
                     Active
                 </Button>
                 :
-                <Button  type='primary' variant="outlined" icon={<CheckCircleOutlined />} onClick={(e)=> {
+                <Button  type='primary'
+variant="outlined"
+icon={<CheckCircleOutlined />}
+onClick={(e)=> {
                                   confirmBox("We are going to deactivate this store.","status",store.slug)
-                                }} style={{background:'#ffc107', color : "black"}}>
+                                }}
+style={{background:'#ffc107', color : "black"}}>
                     Deactive
                 </Button>
               } 
@@ -286,20 +306,32 @@ export const StoresCard = (props) => {
                       query: { slug: store.slug },
                     }}
                   >
-                  <Button type='primary'  style= {{marginTop : '5px',width:'100%'}}  icon={<EditFilled />} primary>
+                  <Button type='primary'
+style= {{marginTop : '5px',width:'100%'}}
+icon={<EditFilled />}
+primary>
                       Edit
                   </Button>
                 </Link>
 
 
-                <Link title='Store Detail' style={{textDecoration : 'none' , color : 'black'}} href={"/store/"+ store.user?.slug}>
+                <Link title='Store Detail'
+style={{textDecoration : 'none' , color : 'black'}}
+href={"/store/"+ store.user?.slug}>
                 { showVisitButton !=false &&
-                <Button type='primary'  style= {{marginTop : '5px',width:'100%'}}  icon={<RightSquareFilled />} primary>
+                <Button type='primary'
+style= {{marginTop : '5px',width:'100%'}}
+icon={<RightSquareFilled />}
+primary>
                       Visit
                   </Button>
     }
                 </Link>
-                <Button type="primary" variant="outlined" style= {{marginTop : '5px'}} icon={<DeleteFilled />} danger 
+                <Button type="primary"
+variant="outlined"
+style= {{marginTop : '5px'}}
+icon={<DeleteFilled />}
+danger 
                   onClick={(e) =>{
                     confirmBox(`Are you sure you want delete store ${store.name}`,"delete",store.slug)
                   }}
@@ -325,10 +357,12 @@ export const StoresCard = (props) => {
         </DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button autoFocus onClick={handleClose}>
+        <Button autoFocus
+onClick={handleClose}>
           Disagree
         </Button>
-        <Button onClick={()=>takeAction()} autoFocus>
+        <Button onClick={()=>takeAction()}
+autoFocus>
           Agree
         </Button>
       </DialogActions>
@@ -342,7 +376,9 @@ export const StoresCard = (props) => {
           onClose={handleClose}
           key={'top' + 'right'}
         >
-      <Alert onClose={handleClose} severity={flag} sx={{ width: '100%' }}>
+      <Alert onClose={handleClose}
+severity={flag}
+sx={{ width: '100%' }}>
           {message}
       </Alert>
       </Snackbar>

@@ -25,7 +25,7 @@ const useCustomers = (content,page,rowsPerPage) => {
     () => {
       return applyPagination(content, page, rowsPerPage);
     },
-    [page, rowsPerPage]
+    [content, page, rowsPerPage]
   )
 };
 
@@ -181,7 +181,9 @@ const Page = () => {
         onClose={handleClose}
         key={'top' + 'right'}
       >
-     <Alert onClose={handleClose} severity={flag} sx={{ width: '100%' }}>
+     <Alert onClose={handleClose}
+severity={flag}
+sx={{ width: '100%' }}>
         {message}
     </Alert>
     </Snackbar>
@@ -197,7 +199,8 @@ const Page = () => {
           py: 8
         }}
       >
-          <Container maxWidth="xxl" sx={{
+          <Container maxWidth="xxl"
+sx={{
                     px : {
                             xs : 1,
                             sm : 1,
@@ -207,8 +210,10 @@ const Page = () => {
                         } 
             }}>
             <Stack spacing={3}>
-              <CustomerHeaders  headerTitle={"All users"} userType="R" /> {/* User type R for retailers when you click on add button we go form userType Retailer by default. */}
-              <BasicSearch onSearch={onSearch} type="A" />
+              <CustomerHeaders  headerTitle={"All users"}
+userType="R" /> {/* User type R for retailers when you click on add button we go form userType Retailer by default. */}
+              <BasicSearch onSearch={onSearch}
+type="A" />
 
             <CustomersTable
                 count={totalElements}

@@ -56,8 +56,11 @@ export const PlanSearch = (props) => {
 
  return (<Card sx={{ p: 2 }}>
     <form onSubmit={(e)=>{handleSubmit(e)}}>
-    <Grid container spacing={1}>
-    <Grid item xs={12} md={2}>
+    <Grid container
+spacing={1}>
+    <Grid item
+xs={12}
+md={2}>
       <OutlinedInput
             onChange={handleChange}
             value={values.slug}
@@ -80,7 +83,9 @@ export const PlanSearch = (props) => {
           </Grid>
 
 
-        <Grid item xs={12} md={2}>
+        <Grid item
+xs={12}
+md={2}>
           <Select
             fullWidth
             sx={{height:55}}
@@ -97,7 +102,9 @@ export const PlanSearch = (props) => {
           </Grid>
 
 
-      <Grid item xs={12} md={2}>      
+      <Grid item
+xs={12}
+md={2}>      
         <TextField
           sx={{height:55}}
           fullWidth
@@ -115,7 +122,9 @@ export const PlanSearch = (props) => {
         />
         </Grid>
 
-      <Grid item xs={12} md={2}>  
+      <Grid item
+xs={12}
+md={2}>  
         <TextField
             sx={{height:55}}
             fullWidth
@@ -136,7 +145,9 @@ export const PlanSearch = (props) => {
 
 
 
-      <Grid item xs={12} md={2}>      
+      <Grid item
+xs={12}
+md={2}>      
         <TextField
           sx={{height:55}}
           fullWidth
@@ -154,7 +165,9 @@ export const PlanSearch = (props) => {
         />
         </Grid>
 
-      <Grid item xs={12} md={2}>  
+      <Grid item
+xs={12}
+md={2}>  
         <TextField
             sx={{height:55}}
             fullWidth
@@ -173,7 +186,9 @@ export const PlanSearch = (props) => {
 
 
 
-      <Grid item xs={6} md={1}>  
+      <Grid item
+xs={6}
+md={1}>  
         <Button type='submit'
           sx={{height:55, width : '100%'}}
           startIcon={(
@@ -185,8 +200,12 @@ export const PlanSearch = (props) => {
         </Button>
       </Grid>
 
-      <Grid item xs={6} md={1}>
-        <Button type='reset' onClick={resetFilters} sx={{height : 54,width: '100%',background:'red',mx:1}} 
+      <Grid item
+xs={6}
+md={1}>
+        <Button type='reset'
+onClick={resetFilters}
+sx={{height : 54,width: '100%',background:'red',mx:1}} 
           startIcon={(
               <SvgIcon fontSize="small">
                 <RefreshOutlined />

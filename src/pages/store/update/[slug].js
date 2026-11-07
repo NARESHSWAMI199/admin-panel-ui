@@ -136,7 +136,7 @@ const getSubcategory = async () => {
 if(store.category !=undefined){
     getSubcategory();
 }
-}, [values.category]) 
+}, [store?.storeSubCategory?.id, store?.storeSubCategory?.subcategory, store.category, values.category])
 
 
 
@@ -201,9 +201,9 @@ const handleSubmit = async (e) =>{
 
   }
 
-const handleClose = useCallback(()=>{
-      setOpen(false)
-})
+const handleClose = () => {
+  setOpen(false)
+};
  
 
 
@@ -254,7 +254,8 @@ return ( <>
         {/* store image input */}
 
         <div style={{marginLeft : '10px',marginTop: '10px'}}>
-        <ImageInput onChange={onSubmit} avtar={storeImage+store.slug+"/"+store.avtar}/>
+        <ImageInput onChange={onSubmit}
+avtar={storeImage+store.slug+"/"+store.avtar}/>
         </div>
           <Grid
             xs={12}
@@ -324,7 +325,9 @@ return ( <>
                 name="state"
                 value={values.state?.label || ''}
                 onChange={(e,value)=>setValues((prevState)=>({...prevState, state : value, city : {label : '', id : ''}}))}
-                renderInput={(params) => <TextField required {...params} label="State" />} >
+                renderInput={(params) => <TextField required
+{...params}
+label="State" />} >
             </Autocomplete> 
 
         </FormControl>
@@ -342,7 +345,10 @@ return ( <>
                   fullWidth
                   value={values.city?.label || ''}
                   onChange={(e,value)=>setValues((prevState)=>({  ...prevState, city : value}))}
-                  renderInput={(params) => <TextField name="city" required {...params} label="City" />} >
+                  renderInput={(params) => <TextField name="city"
+required
+{...params}
+label="City" />} >
               </Autocomplete> 
             </FormControl>
           </Grid>
@@ -363,7 +369,9 @@ return ( <>
                                 name={"category"}
                                 value={values.category?.label || ''}
                                 onChange={(e,value)=>setValues((prevState)=>({...prevState, category : value    }))}
-                                renderInput={(params) => <TextField required {...params} label="Categeory" />} >
+                                renderInput={(params) => <TextField required
+{...params}
+label="Categeory" />} >
                             </Autocomplete> 
                       </FormControl>
                   </Grid>
@@ -382,7 +390,9 @@ return ( <>
                                 name="subcategory"
                                 value={values.subcategory?.label || ''}
                                 onChange={(e,value)=>setValues((prevState)=>({  ...prevState, subcategory : value}))}
-                                renderInput={(params) => <TextField  required {...params} label="Subcategory" />} >
+                                renderInput={(params) => <TextField  required
+{...params}
+label="Subcategory" />} >
                             </Autocomplete> 
                       </FormControl>
                   </Grid>
@@ -441,7 +451,8 @@ return ( <>
 
 
   <CardActions sx={{ justifyContent: 'flex-end' }}>
-      <Button type="submit" variant="contained">
+      <Button type="submit"
+variant="contained">
         Save details
       </Button>
       <Button
@@ -469,7 +480,9 @@ return ( <>
   onClose={handleClose}
   key={'top' + 'right'}
 >
-<Alert onClose={handleClose} severity={flag} sx={{ width: '100%' }}>
+<Alert onClose={handleClose}
+severity={flag}
+sx={{ width: '100%' }}>
   {message}
 </Alert>
 </Snackbar>

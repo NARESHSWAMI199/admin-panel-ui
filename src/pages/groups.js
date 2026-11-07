@@ -31,7 +31,7 @@ const useCustomers = (content,page,rowsPerPage) => {
     () => {
       return applyPagination(content, page, rowsPerPage);
     },
-    [page, rowsPerPage]
+    [content, page, rowsPerPage]
   )
 };
 
@@ -160,7 +160,9 @@ const Page = () => {
         onClose={handleClose}
         key={'top' + 'right'}
       >
-     <Alert onClose={handleClose} severity={flag} sx={{ width: '100%' }}>
+     <Alert onClose={handleClose}
+severity={flag}
+sx={{ width: '100%' }}>
         {message}
     </Alert>
     </Snackbar>
@@ -176,7 +178,8 @@ const Page = () => {
           py: 8
         }}
       >
-          <Container maxWidth="xxl" sx={{
+          <Container maxWidth="xxl"
+sx={{
                     px : {
                             xs : 1,
                             sm : 1,
@@ -212,7 +215,8 @@ const Page = () => {
                 </Link>
               </div>
             </Stack>
-          <BasicSearch  onSearch={onSearch} type="G" />
+          <BasicSearch  onSearch={onSearch}
+type="G" />
 
             <GroupTable
               count={totalElements}

@@ -52,7 +52,7 @@ const Page = () => {
        }
       getData();
   
-     },[data])
+     },[auth.token, slug, user.userType])
 
 
     useEffect( ()=>{
@@ -78,7 +78,7 @@ const Page = () => {
        }
       getData();
   
-     },[data])
+     },[auth.token, auth.user.id, data])
 
 
     useEffect(()=>{
@@ -96,7 +96,7 @@ const Page = () => {
             setMessage(!!err.response ? err.response.data.message : err.message)
             setOpen(true)
         })
-    },[slug])
+    },[auth.token, slug])
 
 
     const updateProfile = async (updatedUser) =>{
@@ -138,7 +138,9 @@ const Page = () => {
         onClose={handleClose}
         key={'top' + 'right'}
       >
-     <Alert onClose={handleClose} severity={flag} sx={{ width: '100%' }}>
+     <Alert onClose={handleClose}
+severity={flag}
+sx={{ width: '100%' }}>
         {message}
     </Alert>
     </Snackbar>
@@ -178,7 +180,10 @@ const Page = () => {
                   md={6}
                   lg={8}
                 >
-                 <AccountProfileDetails user={content} updateProfile={updateProfile} assignGroup={assignGroup} groups={groups} /> 
+                 <AccountProfileDetails user={content}
+updateProfile={updateProfile}
+assignGroup={assignGroup}
+groups={groups} /> 
                 </Grid>
               </Grid>
             </div>

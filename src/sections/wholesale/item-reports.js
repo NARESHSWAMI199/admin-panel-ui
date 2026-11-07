@@ -72,7 +72,8 @@ export const ItemReports = (props) => {
                         spacing={2}
                       >      
                  
-                    {!!itemReport.user?.avtar ? <Image src={userImage+itemReport.user?.slug+"/"+item.avtar} style={{borderRadius : "50%" , width:"50px", height : "50px" }}/>  : 
+                    {!!itemReport.user?.avtar ? <Image src={userImage+itemReport.user?.slug+"/"+item.avtar}
+style={{borderRadius : "50%" , width:"50px", height : "50px" }}/>  : 
                         <Avatar src={userImage+itemReport.user?.slug+"/"+itemReport.user?.avtar} >
                           {getInitials(itemReport.user?.username)}
                         </Avatar>
@@ -101,7 +102,8 @@ export const ItemReports = (props) => {
               )})
             :
             <TableRow>
-              <TableCell colSpan={5} align="center">
+              <TableCell colSpan={5}
+align="center">
                 No Item Reports Found
               </TableCell>
             </TableRow>

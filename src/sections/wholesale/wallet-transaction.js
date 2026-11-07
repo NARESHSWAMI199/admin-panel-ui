@@ -71,7 +71,8 @@ import CopyButton from 'src/components/CopyButton';
                           direction="row"
                           spacing={1}
                         >
-                          <Typography variant="subtitle2" sx={{color : 'green'}}>
+                          <Typography variant="subtitle2"
+sx={{color : 'green'}}>
                               {toTitleCase(transaction?.slug)}
                           </Typography>
                           <CopyButton text={transaction?.slug} />
@@ -80,7 +81,8 @@ import CopyButton from 'src/components/CopyButton';
                  
          
                      <TableCell align="center">
-                        <Typography variant="subtitle2" sx={{ fontWeight : 'bold', color: transaction?.transactionType === "CR" ? "green" : "red"}}>
+                        <Typography variant="subtitle2"
+sx={{ fontWeight : 'bold', color: transaction?.transactionType === "CR" ? "green" : "red"}}>
                           {transaction?.transactionType === "CR" ? "+" : "-"}
                         {transaction.amount} {ruppeeIcon}
                         </Typography>
@@ -88,17 +90,21 @@ import CopyButton from 'src/components/CopyButton';
 
                       <TableCell align="center">
                         {transaction.transactionType === "CR" ? (
-                          <Badge badgeContent={'Credit'} color="success" />
+                          <Badge badgeContent={'Credit'}
+color="success" />
                         ) : (
-                          <Badge badgeContent={'Debit'} color="error" />
+                          <Badge badgeContent={'Debit'}
+color="error" />
                         )}
                       </TableCell>
                 
                           <TableCell align="center">
                             {transaction.status === "S" ? (
-                              <Badge badgeContent={'Sucess'} color="success" />
+                              <Badge badgeContent={'Sucess'}
+color="success" />
                             ) : (
-                              <Badge badgeContent={'Failed'} color="error" />
+                              <Badge badgeContent={'Failed'}
+color="error" />
                             )}
                           </TableCell>
                       <TableCell align="center">{createdAt}</TableCell>
@@ -108,7 +114,8 @@ import CopyButton from 'src/components/CopyButton';
                 )})
               :
               <TableRow>
-                <TableCell colSpan={6} align="center">
+                <TableCell colSpan={6}
+align="center">
                   No Wallet Transactions Found
                 </TableCell>
               </TableRow>

@@ -13,6 +13,7 @@ import { useAuth } from 'src/hooks/use-auth';
 
 
 export const SettingsPassword = (props) => {
+  const { handleSubmit: onSubmit } = props;
   const [values, setValues] = useState({
     password: '',
     confirm: ''
@@ -47,14 +48,14 @@ export const SettingsPassword = (props) => {
         return false;
       }
 
-      let success = props.handleSubmit(user.slug,password)
+      let success = onSubmit(user.slug,password)
 
       if(success) {
         form.reset()
         setValues({})
       } 
 
-    },[])
+    },[onSubmit, user.slug])
 
 
   return (
@@ -96,7 +97,8 @@ export const SettingsPassword = (props) => {
         <Divider />
         
         <CardActions sx={{ justifyContent: 'flex-end' }}>
-          <Button type='submit' variant="contained">
+          <Button type='submit'
+variant="contained">
             Update
           </Button>
         </CardActions>

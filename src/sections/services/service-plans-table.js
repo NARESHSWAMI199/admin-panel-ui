@@ -95,13 +95,19 @@ export const ServicePlansTable = (props) =>{
                                 const isSelected = selected.includes(plan.id);
                                 const createdAt = !!plan?.createdAt ? format(plan?.createdAt, 'dd/MM/yyyy') : '';
                                 return (
-                                    <TableRow hover key={plan.id} selected={isSelected}>
+                                    <TableRow hover
+key={plan.id}
+selected={isSelected}>
                                         <TableCell padding="checkbox"></TableCell>
 
                                         {/* Plan Name */}
                                         <TableCell>
-                                            <Stack alignItems="center" direction="row" spacing={2}>
-                                                <Typography title="Edit Profile" variant="subtitle2" sx={{ color: 'text.primary' }}>
+                                            <Stack alignItems="center"
+direction="row"
+spacing={2}>
+                                                <Typography title="Edit Profile"
+variant="subtitle2"
+sx={{ color: 'text.primary' }}>
                                                     {toTitleCase(plan.name)}
                                                 </Typography>
                                             </Stack>
@@ -114,7 +120,9 @@ export const ServicePlansTable = (props) =>{
                                         
                                         {/* Months */}
                                         <TableCell>
-                                            <Stack alignItems="center" direction="row" spacing={2}>
+                                            <Stack alignItems="center"
+direction="row"
+spacing={2}>
                                                 {plan.months}
                                             </Stack>
                                         </TableCell>
@@ -122,7 +130,9 @@ export const ServicePlansTable = (props) =>{
 
                                         {/* plan price */}
                                         <TableCell>
-                                            <Stack alignItems="center" direction="row" spacing={2}>
+                                            <Stack alignItems="center"
+direction="row"
+spacing={2}>
                                                 {plan.price}
                                                 <CurrencyRupeeIcon sx={{ fontSize: '15px', mt: '20px' }} />
                                             </Stack>
@@ -130,7 +140,9 @@ export const ServicePlansTable = (props) =>{
 
                                         {/* discount */}
                                         <TableCell>
-                                            <Stack alignItems="center" direction="row" spacing={2}>
+                                            <Stack alignItems="center"
+direction="row"
+spacing={2}>
                                                 <span>{plan.discount} </span>
                                                 <CurrencyRupeeIcon sx={{ fontSize: '15px', mt: '20px' }} />
                                                 <DiscountIcon sx={{ color: 'red', fontSize: '20px', mt: '20px', px: '0px' }} />
@@ -139,7 +151,9 @@ export const ServicePlansTable = (props) =>{
 
                                         {/* discount % */}
                                         <TableCell>
-                                            <Stack alignItems="center" direction="row" spacing={2}>
+                                            <Stack alignItems="center"
+direction="row"
+spacing={2}>
                                                 <span
                                                     style={{
                                                         color: 'green',
@@ -153,7 +167,9 @@ export const ServicePlansTable = (props) =>{
 
                                         {/* Total price */}
                                         <TableCell>
-                                            <Stack alignItems="center" direction="row" spacing={2}>
+                                            <Stack alignItems="center"
+direction="row"
+spacing={2}>
                                                 {plan.price - plan.discount}
                                                 <CurrencyRupeeIcon sx={{ fontSize: '15px', mt: '20px' }} />
                                             </Stack>
@@ -162,7 +178,9 @@ export const ServicePlansTable = (props) =>{
                                         {/* actions */}
                                         <TableCell>
                                             {plan.status !== 'A' ? (
-                                                <CancelIcon sx={{ marginX: '2px', color: 'Red' }} titleAccess='activate' onClick={() => {
+                                                <CancelIcon sx={{ marginX: '2px', color: 'Red' }}
+titleAccess='activate'
+onClick={() => {
                                                     setMessage("We are going to activate this service plan.");
                                                     setSlug(plan.slug);
                                                     setStatus('A');
@@ -170,7 +188,9 @@ export const ServicePlansTable = (props) =>{
                                                     confirmBox();
                                                 }} />
                                             ) : (
-                                                <CheckCircleIcon sx={{ marginX: '2px', color: 'Green' }} titleAccess='deactivate' onClick={() => {
+                                                <CheckCircleIcon sx={{ marginX: '2px', color: 'Green' }}
+titleAccess='deactivate'
+onClick={() => {
                                                     setMessage("We are going to deactivate this service plan.");
                                                     setSlug(plan.slug);
                                                     setStatus('D');
@@ -185,7 +205,9 @@ export const ServicePlansTable = (props) =>{
                                                 <EditIcon sx={{ marginX: '5px', color: '#111927' }} titleAccess='Edit' />
                                             </Link> */}
 
-                                            <DeleteIcon sx={{ marginX: '5px', color: 'Red' }} titleAccess='delete' onClick={() => {
+                                            <DeleteIcon sx={{ marginX: '5px', color: 'Red' }}
+titleAccess='delete'
+onClick={() => {
                                                 setSlug(plan.slug);
                                                 setRowIndex(index);
                                                 setMessage("We are going to delete this service plan. If you agree press agree otherwise press disagree.");
@@ -198,7 +220,8 @@ export const ServicePlansTable = (props) =>{
                             })
                             :
                             <TableRow>
-                                <TableCell colSpan={12} align="center">
+                                <TableCell colSpan={12}
+align="center">
                                     <Typography variant="subtitle1">No service plan found.</Typography>
                                 </TableCell>
                             </TableRow>
@@ -233,10 +256,12 @@ export const ServicePlansTable = (props) =>{
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                    <Button autoFocus onClick={handleClose}>
+                    <Button autoFocus
+onClick={handleClose}>
                         Disagree
                     </Button>
-                    <Button onClick={() => takeAction(action)} autoFocus>
+                    <Button onClick={() => takeAction(action)}
+autoFocus>
                         Agree
                     </Button>
                 </DialogActions>

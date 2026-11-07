@@ -91,7 +91,7 @@ const handleChange = useCallback(
     }
     getData();
 
-}, [])
+}, [auth.token])
 
 
 useEffect(() => {
@@ -113,12 +113,11 @@ useEffect(() => {
   if(values.category !=undefined){
       getSubcategory();
   }
-}, [values.category]) 
+}, [auth.token, values.category])
 
 
 
-  const handleSubmit = useCallback(
-    (e) =>{
+  const handleSubmit = (e) => {
     e.preventDefault()
     const form = e.target;
     const formData = new FormData(form)
@@ -155,11 +154,11 @@ useEffect(() => {
         setOpen(true)
     })
 
-  })
+    }
 
-  const handleClose = useCallback(()=>{
-        setOpen(false)
-  })
+  const handleClose = () => {
+    setOpen(false)
+  };
    
 
 const reset = () =>{
@@ -219,7 +218,8 @@ return ( <>
         <Box sx={{
             my: 2
         }}>
-             <MultipleImageInput totalImage={5} onChange={onSubmit} />
+             <MultipleImageInput totalImage={5}
+onChange={onSubmit} />
         </Box>
 
           <Grid
@@ -293,7 +293,8 @@ return ( <>
                 md={6}
             >
                 <FormControl fullWidth>
-                    <InputLabel style={{background :'white'}} id="itemLabel">Category</InputLabel>
+                    <InputLabel style={{background :'white'}}
+id="itemLabel">Category</InputLabel>
                     <Select
                         labelId="itemLabel"
                         id="category"
@@ -303,7 +304,8 @@ return ( <>
                     >
                     {categories.map((categroyObj , i) => {
                         if(categroyObj.id !=0)
-                        return ( <MenuItem key={i} value={categroyObj.id}>{categroyObj.category}</MenuItem>
+                        return ( <MenuItem key={i}
+value={categroyObj.id}>{categroyObj.category}</MenuItem>
                         )})
                     }
                     <MenuItem value={0}>{"Other"}</MenuItem>
@@ -318,7 +320,8 @@ return ( <>
       md={6}
   >
       <FormControl fullWidth>
-          <InputLabel style={{background :'white'}} id="itemLabel">Subcategory</InputLabel>
+          <InputLabel style={{background :'white'}}
+id="itemLabel">Subcategory</InputLabel>
           <Select
               labelId="itemLabel"
               id="subcategory"
@@ -328,7 +331,8 @@ return ( <>
           >
           {subcategories.map((subcategroyObj , i) => {
                 if(subcategroyObj.id !=0)
-              return ( <MenuItem key={i} value={subcategroyObj.id}>{subcategroyObj.subcategory}</MenuItem>
+              return ( <MenuItem key={i}
+value={subcategroyObj.id}>{subcategroyObj.subcategory}</MenuItem>
               )})
           }
               <MenuItem value={0}>{"Other"}</MenuItem>
@@ -365,7 +369,8 @@ return ( <>
             md={6}
           >
             <FormControl fullWidth>
-          <InputLabel style={{background :'white'}} id="itemLabel">Label</InputLabel>
+          <InputLabel style={{background :'white'}}
+id="itemLabel">Label</InputLabel>
           <Select
             labelId="itemLabel"
             id="demo-simple-select"
@@ -414,7 +419,8 @@ return ( <>
       </CardContent>
       <Divider />
     <CardActions sx={{ justifyContent: 'flex-end' }}>
-        <Button type="submit" variant="contained">
+        <Button type="submit"
+variant="contained">
           Save details
         </Button>
       </CardActions>
@@ -431,7 +437,9 @@ return ( <>
       onClose={handleClose}
       key={'top' + 'right'}
     >
-      <Alert onClose={handleClose} severity={flag} sx={{ width: '100%' }}>
+      <Alert onClose={handleClose}
+severity={flag}
+sx={{ width: '100%' }}>
           {message}
       </Alert>
     </Snackbar>

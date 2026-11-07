@@ -18,7 +18,6 @@ const Page = () => {
   const [permissions, setPermissions] = useState({})
   const [group, setGroup] = useState({})
   const [givenPermissions, setGivenPermissions] = useState([])
-  let permissionsIds = []
   const auth = useAuth();
   const router = useRouter()
   const { slug } = router.query
@@ -45,7 +44,6 @@ const Page = () => {
       .then(res => {
         let response = res.data.res;
         setGroup(response)
-        permissionsIds = permissionsIds.concat(response.permissions)
         setGivenPermissions(response.permissions)
       })
       .catch(err => {
@@ -56,7 +54,7 @@ const Page = () => {
     // end here.
 
 
-  }, [])
+  }, [slug])
 
 
 
@@ -139,7 +137,8 @@ const Page = () => {
         key={'top' + 'right'}
       >
         <Alert onClose={handleClose}
-          severity={flag} sx={{ width: '100%' }}>
+          severity={flag}
+sx={{ width: '100%' }}>
           {message}
         </Alert>
       </Snackbar>
@@ -191,7 +190,9 @@ const Page = () => {
                   <FormControlLabel sx={{ mx: 5 }}
                     control={
                       <Checkbox checked={givenPermissions.length == Object.keys(permissions).reduce((total, key) => total + permissions[key].length, 0)}
-                       indeterminate={givenPermissions.length > 0 && givenPermissions.length < Object.keys(permissions).reduce((total, key) => total + permissions[key].length, 0)} onChange={allowAll} name={0} />
+                       indeterminate={givenPermissions.length > 0 && givenPermissions.length < Object.keys(permissions).reduce((total, key) => total + permissions[key].length, 0)}
+onChange={allowAll}
+name={0} />
                     }
                     label={"All Permissions"} />
                 </Grid>
@@ -203,14 +204,18 @@ const Page = () => {
                   return (<Grid xs={3}
                     key={index}
                   >
-                    <FormControl sx={{ m: 3 }} component="fieldset" variant="standard">
+                    <FormControl sx={{ m: 3 }}
+component="fieldset"
+variant="standard">
                       <FormLabel component="legend">{element}</FormLabel>
                       {<FormGroup>
                         {permissions[element].map((item, i) => {
                           return (<FormControlLabel
                             key={i}
                             control={
-                              <Checkbox checked={givenPermissions.includes(item.id)} onChange={handleChange} name={item.id} />
+                              <Checkbox checked={givenPermissions.includes(item.id)}
+onChange={handleChange}
+name={item.id} />
                             }
                             label={item.displayName}
                           />)
@@ -224,7 +229,8 @@ const Page = () => {
               {/* end here... */}
 
               <CardActions sx={{ justifyContent: 'flex-end' }}>
-                <Button type="submit" variant="contained">
+                <Button type="submit"
+variant="contained">
                   Save details
                 </Button>
               </CardActions>

@@ -56,7 +56,8 @@ function HomeNavbar() {
     <AppBar position="fixed">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Avatar src={logo.src} sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+          <Avatar src={logo.src}
+sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
           <Typography
             variant="h6"
             noWrap
@@ -112,7 +113,8 @@ function HomeNavbar() {
               sx={{ display: { xs: 'block', md: 'none' } }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={()=>handleRedirect(page)}>
+                <MenuItem key={page}
+onClick={()=>handleRedirect(page)}>
                   <Typography sx={{ textAlign: 'center' }}>{page}</Typography>
                 </MenuItem>
               ))}

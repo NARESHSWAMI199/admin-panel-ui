@@ -129,7 +129,8 @@ export const AccountProfileDetails = (props) => {
               >
               {(props.user.userType =="S" || props.user.userType =="SA" ) ?
              <FormControl sx={{ minWidth: 350, maxWidth: 500 }}>
-                      <InputLabel shrink htmlFor="select-multiple-native">
+                      <InputLabel shrink
+htmlFor="select-multiple-native">
                         Groups
                       </InputLabel>
                       <Select
@@ -145,7 +146,9 @@ export const AccountProfileDetails = (props) => {
                         }}
                       >
                         {groups.map((group) => (
-                          <option selected={props.assignGroup.includes(group.id)} key={group.id} value={group.id}>
+                          <option selected={props.assignGroup.includes(group.id)}
+key={group.id}
+value={group.id}>
                             {group.name}
                           </option>
                         ))}
@@ -171,7 +174,8 @@ export const AccountProfileDetails = (props) => {
         </CardContent>
         <Divider />
         <CardActions sx={{ justifyContent: 'flex-end' }}>
-          <Button type="submit" variant="contained">
+          <Button type="submit"
+variant="contained">
             Save details
           </Button>
         </CardActions>

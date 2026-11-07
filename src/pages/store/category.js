@@ -81,7 +81,9 @@ const [categories,setCategories] = useState([])
         onClose={handleClose}
         key={'top' + 'right'}
       >
-     <Alert onClose={handleClose} severity={flag} sx={{ width: '100%' }}>
+     <Alert onClose={handleClose}
+severity={flag}
+sx={{ width: '100%' }}>
         {message}
     </Alert>
     </Snackbar>
@@ -97,7 +99,8 @@ const [categories,setCategories] = useState([])
           py: 8
         }}
       >
-          <Container maxWidth="xxl" sx={{
+          <Container maxWidth="xxl"
+sx={{
             px : {
                     xs : 0,
                     sm : 0,

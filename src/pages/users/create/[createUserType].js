@@ -60,7 +60,7 @@ const Page = () =>{
         axios.get(host+"/admin/address/state")
         .then(res=>setStateList(res.data))
         .catch(err=>console.log(err))
-    },[])
+    },[auth.token])
 
 
     useEffect( ()=>{
@@ -86,7 +86,7 @@ const Page = () =>{
        }
       getData();
   
-     },[data,userType])
+     },[auth.token, data, user.id, userType])
 
 
     useEffect(()=>{
@@ -104,7 +104,7 @@ const Page = () =>{
       if (values.state != undefined) {
         getCity()
       }
-    },[values.state])
+    },[auth.token, values.state])
 
 
 
@@ -138,7 +138,7 @@ const Page = () =>{
         }
         getData();
 
-      }, [])
+      }, [auth.token])
 
 
       useEffect(() => {
@@ -161,7 +161,7 @@ const Page = () =>{
       if(values.category !=undefined){
           getSubcategory();
       }
-      }, [values.category]) 
+      }, [auth.token, values.category])
 
 
 
@@ -177,8 +177,7 @@ const Page = () =>{
       );
 
 
-      const handleSubmit = useCallback(
-        (e) =>{
+      const handleSubmit = (e) => {
         e.preventDefault()
         const form = e.target;
         const formData = new FormData(form)
@@ -229,11 +228,11 @@ const Page = () =>{
             setOpen(true)
         })
      
-      })
+      }
 
-      const handleClose = useCallback(()=>{
-            setOpen(false)
-      })
+      const handleClose = () => {
+        setOpen(false)
+      };
        
 
     const reset = () =>{
@@ -309,7 +308,8 @@ const Page = () =>{
                         md={6}
                       >
                         <FormControl fullWidth>
-                      <InputLabel style={{background :'white'}}  id="userTypeLabel">User type</InputLabel>
+                      <InputLabel style={{background :'white'}}
+id="userTypeLabel">User type</InputLabel>
                       <Select
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
@@ -368,7 +368,8 @@ const Page = () =>{
                           md={6}
                         >
                         <FormControl sx={{ m: 1, minWidth: 500, maxWidth: 500 }}>
-                                <InputLabel shrink htmlFor="select-multiple-native">
+                                <InputLabel shrink
+htmlFor="select-multiple-native">
                                   Groups
                                 </InputLabel>
                                 <Select
@@ -383,7 +384,8 @@ const Page = () =>{
                                   }}
                                 >
                                   {groups.map((group) => (
-                                    <option key={group.id} value={group.id}>
+                                    <option key={group.id}
+value={group.id}>
                                       {group.name}
                                     </option>
                                   ))}
@@ -487,7 +489,9 @@ const Page = () =>{
                                 name="state"
                                 value={values.state?.label || ''}
                                 onChange={(e, value) => setValues((prevState) => ({ ...prevState, state: value }))}
-                                renderInput={(params) => <TextField required {...params} label="State" />} >
+                                renderInput={(params) => <TextField required
+{...params}
+label="State" />} >
                             </Autocomplete>
                   
                       </FormControl>
@@ -520,7 +524,10 @@ const Page = () =>{
                                     fullWidth
                                     value={values.city?.label || ''}
                                     onChange={(e, value) => setValues((prevState) => ({ ...prevState, city: value }))}
-                                    renderInput={(params) => <TextField name="city" required {...params} label="City" />} >
+                                    renderInput={(params) => <TextField name="city"
+required
+{...params}
+label="City" />} >
                                 </Autocomplete>
 
                           </FormControl>
@@ -543,7 +550,9 @@ const Page = () =>{
                                 name={"category"}
                                 value={values.category?.label || ''}
                                 onChange={(e, value) => setValues((prevState) => ({ ...prevState, category: value }))}
-                                renderInput={(params) => <TextField required {...params} label="Categeory" />} >
+                                renderInput={(params) => <TextField required
+{...params}
+label="Categeory" />} >
                           </Autocomplete>
                       </FormControl>
                   </Grid>
@@ -563,7 +572,9 @@ const Page = () =>{
                                 name="subcategory"
                                 value={values.subcategory?.label || ''}
                                 onChange={(e, value) => setValues((prevState) => ({ ...prevState, subcategory: value }))}
-                                renderInput={(params) => <TextField required {...params} label="Subcategory" />} >
+                                renderInput={(params) => <TextField required
+{...params}
+label="Subcategory" />} >
                             </Autocomplete>
                       </FormControl>
                   </Grid>
@@ -622,7 +633,8 @@ const Page = () =>{
                 </>
         }
                 <CardActions sx={{ justifyContent: 'flex-end' }}>
-                    <Button type="submit" variant="contained">
+                    <Button type="submit"
+variant="contained">
                       Save details
                     </Button>
                   </CardActions>
@@ -635,7 +647,9 @@ const Page = () =>{
         onClose={handleClose}
         key={'top' + 'right'}
       >
-     <Alert onClose={handleClose} severity={flag} sx={{ width: '100%' }}>
+     <Alert onClose={handleClose}
+severity={flag}
+sx={{ width: '100%' }}>
         {message}
     </Alert>
     </Snackbar>

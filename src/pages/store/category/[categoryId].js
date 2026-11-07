@@ -146,13 +146,15 @@ const handleChange = useCallback(
   []
 );
 
-const handleClose = useCallback(()=>{
-      setOpen(false)
-})
+const handleClose = () => {
+  setOpen(false)
+};
 
 const addSubCategory = () =>{
   setSubcategoriesCard(
-  <Grid xs={12} md={3} sx={{
+  <Grid xs={12}
+md={3}
+sx={{
     display : 'flex',
     flexDirection : 'column',
     textAlign :'center',
@@ -246,17 +248,22 @@ return ( <>
     </div>
  
 
-<Grid xs={12} md={8} lg={8}>
+<Grid xs={12}
+md={8}
+lg={8}>
   <Card>
       <CardHeader title="Add Store Category"/>
       <CardContent>
         <Box sx={{ m: -1.5 }}>
-        <Grid container spacing={3}>
-            <Grid xs={12} md={2}>
+        <Grid container
+spacing={3}>
+            <Grid xs={12}
+md={2}>
                 <Box sx={{
                     textAlign : 'center'
                    }}>
-                  <ImageInput totalImage={0} avtar = {values.icon}/>
+                  <ImageInput totalImage={0}
+avtar = {values.icon}/>
                 </Box>
             </Grid>
 
@@ -269,7 +276,8 @@ return ( <>
                 }}
             >
                 <FormControl fullWidth>
-                    <InputLabel  sx={{background : 'white'}} id="itemLabel">Category</InputLabel>
+                    <InputLabel  sx={{background : 'white'}}
+id="itemLabel">Category</InputLabel>
                     <Select
                         labelId="itemLabel"
                         id="category"
@@ -279,7 +287,8 @@ return ( <>
                     >
                     {categories.map((categroyObj , i) => {
                         if(categroyObj.id != 0)
-                        return ( <MenuItem key={i} value={categroyObj.id}>{categroyObj.category}</MenuItem>
+                        return ( <MenuItem key={i}
+value={categroyObj.id}>{categroyObj.category}</MenuItem>
                         )})
                     }
                     <MenuItem value={0}>{"Other"}</MenuItem>
@@ -292,7 +301,8 @@ return ( <>
       <Divider/>
       <CardActions sx={{ justifyContent: 'flex-end' }}>
       <Link href={"/store/category/update/"+values.category}>
-        <Button type="submit" variant="contained">
+        <Button type="submit"
+variant="contained">
           Edit
         </Button>
       </Link>
@@ -303,19 +313,28 @@ return ( <>
 
   <Spinner show={showSpinner}/>
 
-    <Grid xs={12} md={12} container spacing={3} >
+    <Grid xs={12}
+md={12}
+container
+spacing={3} >
     {subcategoryCard}
     
     {subcategories.map((subcategory , i)=>{
       return <Grid
         key={i}
-        xs={12} md={3} sx={{
+        xs={12}
+md={3}
+sx={{
         display : 'flex',
         flexDirection : 'column',
         textAlign :'center',
         alignItems : 'center'
       }}>
-         <SubcategoryCard onSubmit={onSubmit} onDelete={onDelete} categoryId={values.category} subcategory = {subcategory} buttonLabel={"Update"}/>
+         <SubcategoryCard onSubmit={onSubmit}
+onDelete={onDelete}
+categoryId={values.category}
+subcategory = {subcategory}
+buttonLabel={"Update"}/>
     </Grid>
   })} 
 
@@ -330,7 +349,9 @@ return ( <>
     onClose={handleClose}
     key={'top' + 'right'}
   >
-    <Alert onClose={handleClose} severity={flag} sx={{ width: '100%' }}>
+    <Alert onClose={handleClose}
+severity={flag}
+sx={{ width: '100%' }}>
         {message}
     </Alert>
   </Snackbar>

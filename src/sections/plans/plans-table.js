@@ -95,7 +95,9 @@ export const PlanTable = (props) => {
                 const createdAt = format(plan.createdAt, 'dd/MM/yyyy');
                 const expiryDate = format(plan.expiryDate, 'dd/MM/yyyy');
                 return (
-                  <TableRow hover key={plan.id} selected={isSelected}>
+                  <TableRow hover
+key={plan.id}
+selected={isSelected}>
                     <TableCell padding="checkbox"></TableCell>
 
                     {/* plan name */}
@@ -119,7 +121,9 @@ export const PlanTable = (props) => {
 
                     {/* plan price */}
                     <TableCell>
-                      <Stack alignItems="center" direction="row" spacing={2}>
+                      <Stack alignItems="center"
+direction="row"
+spacing={2}>
                         {plan.servicePlan?.price}
                         <CurrencyRupeeIcon sx={{ fontSize: '15px', mt: '20px' }} />
                       </Stack>
@@ -127,7 +131,9 @@ export const PlanTable = (props) => {
 
                     {/* discount */}
                     <TableCell>
-                      <Stack alignItems="center" direction="row" spacing={2}>
+                      <Stack alignItems="center"
+direction="row"
+spacing={2}>
                         <span>{plan.servicePlan?.discount} </span>
                         <CurrencyRupeeIcon sx={{ fontSize: '15px', mt: '20px' }} />
                         <DiscountIcon sx={{ color: 'red', fontSize: '20px', mt: '20px', px: '0px' }} />
@@ -136,7 +142,9 @@ export const PlanTable = (props) => {
 
                     {/* discount % */}
                     <TableCell>
-                      <Stack alignItems="center" direction="row" spacing={2}>
+                      <Stack alignItems="center"
+direction="row"
+spacing={2}>
                         <span
                           style={{
                             color: 'green',
@@ -151,7 +159,9 @@ export const PlanTable = (props) => {
 
                     {/* paid price */}
                     <TableCell>
-                      <Stack alignItems="center" direction="row" spacing={2}>
+                      <Stack alignItems="center"
+direction="row"
+spacing={2}>
                         {plan.servicePlan?.price - plan.servicePlan?.discount}
                         <CurrencyRupeeIcon sx={{ fontSize: '15px', mt: '20px' }} />
                       </Stack>
@@ -166,9 +176,11 @@ export const PlanTable = (props) => {
                     {/* status */}
                     <TableCell align={'center'}>
                       {plan.expiryDate >= currentDateTime ? (
-                        <Badge color="success" badgeContent={'Active'} />
+                        <Badge color="success"
+badgeContent={'Active'} />
                       ) : (
-                        <Badge color="error" badgeContent={'Expired'} />
+                        <Badge color="error"
+badgeContent={'Expired'} />
                       )}
                     </TableCell>
 
@@ -176,10 +188,12 @@ export const PlanTable = (props) => {
                     <TableCell align='center'>
                       {/* <Stack alignItems="center" direction="row" spacing={2}> */}
                       {plan.servicePlan?.price < 1 && (
-                        <Badge color="error" badgeContent={'Free'} />
+                        <Badge color="error"
+badgeContent={'Free'} />
                       )}
                       {plan.servicePlan?.price > 0 && (
-                        <Badge color="success" badgeContent={'Paid'} />
+                        <Badge color="success"
+badgeContent={'Paid'} />
                       )}
                       {/* </Stack> */}
                     </TableCell>
@@ -187,7 +201,8 @@ export const PlanTable = (props) => {
 
                 )}) :
                 <TableRow>
-                    <TableCell align='center' colSpan={12}>
+                    <TableCell align='center'
+colSpan={12}>
                       <Typography variant='subtitle1'>
                       No plans found.
                       </Typography>
@@ -223,10 +238,12 @@ export const PlanTable = (props) => {
           <DialogContentText>{message}</DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button autoFocus onClick={handleClose}>
+          <Button autoFocus
+onClick={handleClose}>
             Disagree
           </Button>
-          <Button onClick={() => takeAction(action)} autoFocus>
+          <Button onClick={() => takeAction(action)}
+autoFocus>
             Agree
           </Button>
         </DialogActions>

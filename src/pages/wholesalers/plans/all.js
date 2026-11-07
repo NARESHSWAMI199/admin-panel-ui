@@ -43,13 +43,13 @@ const Page = () => {
                 setOpen(true);
             });
         // end here.
-    }, [data, page, rowsPerPage]);
+    }, [auth.token, data, page, rowsPerPage]);
 
 
     const handlePageChange = useCallback(
         (event, value) => {
             setPage(value);
-            setData({ ...data, pageNumber: value })
+            setData((previous) => ({ ...previous, pageNumber: value }))
         },
         []
     );
@@ -89,7 +89,9 @@ const Page = () => {
                 onClose={handleClose}
                 key={'top' + 'right'}
             >
-                <Alert onClose={handleClose} severity={flag} sx={{ width: '100%' }}>
+                <Alert onClose={handleClose}
+severity={flag}
+sx={{ width: '100%' }}>
                     {message}
                 </Alert>
             </Snackbar>
@@ -103,7 +105,8 @@ const Page = () => {
                     py: 8,
                 }}
             >
-            <Container maxWidth="xxl" sx={{
+            <Container maxWidth="xxl"
+sx={{
                 px : {
                         xs : 1,
                         sm : 1,
@@ -113,7 +116,8 @@ const Page = () => {
                     } 
                 }}>
                     <Stack spacing={3}>
-                        <BasicHeaders headerTitle={'Sold Plans'} userType="W" />
+                        <BasicHeaders headerTitle={'Sold Plans'}
+userType="W" />
                         <PlanSearch onSearch={onSearch} />
                         <PlanTable
                             count={totalElements}

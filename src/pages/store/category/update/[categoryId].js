@@ -55,7 +55,7 @@ useEffect(() => {
     }
     getData();
 
-}, [])
+}, [categoryId])
 
 
 
@@ -114,11 +114,11 @@ useEffect(() => {
         setOpen(true)
     })
 
-  },[])
+  },[categoryId])
 
-  const handleClose = useCallback(()=>{
-        setOpen(false)
-  })
+  const handleClose = () => {
+    setOpen(false)
+  };
    
 
 const reset = () =>{
@@ -175,7 +175,9 @@ return ( <>
           <Box sx={{
             textAlign : 'center'
           }}>
-            <ImageInput totalImage={2} onChange={onSubmit} avtar = {values.icon}/>
+            <ImageInput totalImage={2}
+onChange={onSubmit}
+avtar = {values.icon}/>
           </Box>
             </Grid>
           {/* CATEGORY NAME */}
@@ -202,7 +204,8 @@ return ( <>
       </CardContent>
       <Divider/>
       <CardActions sx={{ justifyContent: 'flex-end' }}>
-        <Button type="submit" variant="contained">
+        <Button type="submit"
+variant="contained">
           Save details
         </Button>
       </CardActions>
@@ -219,7 +222,9 @@ return ( <>
       onClose={handleClose}
       key={'top' + 'right'}
     >
-      <Alert onClose={handleClose} severity={flag} sx={{ width: '100%' }}>
+      <Alert onClose={handleClose}
+severity={flag}
+sx={{ width: '100%' }}>
           {message}
       </Alert>
     </Snackbar>

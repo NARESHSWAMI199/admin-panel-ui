@@ -7,6 +7,7 @@ import { useAuth } from 'src/hooks/use-auth';
 
 
 export const  PaginationSettings = (props) => {
+    const { showError, showSuccess } = props
     const [sortingLables, setSortingLabels] = useState([])
     const [rowsPerPageObj , setRowPerPageObj] = useState({})
     const auth = useAuth()
@@ -15,19 +16,20 @@ export const  PaginationSettings = (props) => {
         // get all pagination setting labels
         apiRequest.get("/admin/pagination/all")
         .then(res => {
-            let sortingLables = Object.values(res.data);  // there we get a object with key ; value where in value we all detail about keys and rowNumbers
-            setSortingLabels(sortingLables)
-            sortingLables.map(label => {
+            const sortingLabels = Object.values(res.data);  // there we get a object with key ; value where in value we all detail about keys and rowNumbers
+            const rowsPerPage = {}
+            setSortingLabels(sortingLabels)
+            sortingLabels.forEach(label => {
                 let fieldFor = label.pagination?.fieldFor;
-                rowsPerPageObj[fieldFor] = label.rowsNumber
-                setRowPerPageObj({...rowsPerPageObj})
+                rowsPerPage[fieldFor] = label.rowsNumber
             })
+            setRowPerPageObj(rowsPerPage)
         })
         .catch(err=>{
-            props.showError(err);
+            showError(err);
         })
         
-    },[])
+    },[showError])
 
     // TODO ; make sure call from auth-context or redux side 
     const handleChange = (event,pagination) => {
@@ -37,13 +39,15 @@ export const  PaginationSettings = (props) => {
             rowsNumber : rowsNumber
         })
         .then(res => {
-            props.showSuccess(res.data.message)
+            showSuccess(res.data.message)
         })
         .catch(err => {
-            props.showError(err);
+            showError(err);
         })
-        rowsPerPageObj[pagination?.fieldFor] = rowsNumber
-        setRowPerPageObj({...rowsPerPageObj})
+        setRowPerPageObj((previous) => ({
+            ...previous,
+            [pagination?.fieldFor]: rowsNumber
+        }))
         // updated with redux also 
         auth.updatePaginations(rowsNumber,pagination)
     };
@@ -72,12 +76,15 @@ export const  PaginationSettings = (props) => {
                         {sortingLables.map((label,key)=>{
                             let fieldFor = label.pagination?.fieldFor;
                             return (
-                                <Box key={key} sx={{display  : 'flex', alignItems : 'center',justifyContent : 'center'}}>
-                                        <Typography sx={{minWidth : 150}} variant="h6">
+                                <Box key={key}
+sx={{display  : 'flex', alignItems : 'center',justifyContent : 'center'}}>
+                                        <Typography sx={{minWidth : 150}}
+variant="h6">
                                             {label.pagination?.fieldFor}
                                         </Typography>
 
-                                        <FormControl fullWidth sx={{mx : 3}}> 
+                                        <FormControl fullWidth
+sx={{mx : 3}}> 
                                             <Select
                                                 labelId="demo-simple-select-label"
                                                 id="demo-simple-select"
@@ -85,7 +92,8 @@ export const  PaginationSettings = (props) => {
                                                 onChange={(e) => handleChange(e,label.pagination)}
                                             >
                                                 {rowsPerPageOptions.map((value , index)=>{
-                                                    return <MenuItem key={index} value={value}>{value}</MenuItem>
+                                                    return <MenuItem key={index}
+value={value}>{value}</MenuItem>
                                                 })}
 
                                             </Select>

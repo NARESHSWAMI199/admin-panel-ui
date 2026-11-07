@@ -39,7 +39,7 @@ const Page = ()=> {
         setOpen(true)
       })
       // end here.
-  }, [])
+  }, [slug])
 
 
 
@@ -115,7 +115,9 @@ const handleClose = () => {
         onClose={handleClose}
         key={'top' + 'right'}
       >
-     <Alert onClose={handleClose} severity={flag} sx={{ width: '100%' }}>
+     <Alert onClose={handleClose}
+severity={flag}
+sx={{ width: '100%' }}>
         {message}
     </Alert>
     </Snackbar>
@@ -143,24 +145,31 @@ const handleClose = () => {
                   <FormControlLabel sx={{mx:5}}
                     control={
                       <Checkbox checked={givenPermissions.length == Object.keys(permissions).reduce((total, key) => total + permissions[key].length, 0)} 
-                      indeterminate={givenPermissions.length > 0 && givenPermissions.length < Object.keys(permissions).reduce((total, key) => total + permissions[key].length, 0)}  onChange={allowAll} name={0} />
+                      indeterminate={givenPermissions.length > 0 && givenPermissions.length < Object.keys(permissions).reduce((total, key) => total + permissions[key].length, 0)}
+onChange={allowAll}
+name={0} />
                     }
                     label={"All Permissions"}/>
                 </Grid>
               </Grid>
           {/* permissions */}
-          <Grid container spacing={3}>
+          <Grid container
+spacing={3}>
                 {Object.keys(permissions).map((element,index) => {
                 return (<Grid xs={4}
                   key={index} >
-                  <FormControl sx={{ m: 3 }} component="fieldset" variant="standard">
+                  <FormControl sx={{ m: 3 }}
+component="fieldset"
+variant="standard">
                     <FormLabel component="legend">{element}</FormLabel>
                     {<FormGroup>
                       {permissions[element].map((item,i)=>{
                        return( <FormControlLabel
                         key={i}
                           control={
-                            <Checkbox checked={givenPermissions.includes(item.id)} onChange={handleChange} name={item.id} />
+                            <Checkbox checked={givenPermissions.includes(item.id)}
+onChange={handleChange}
+name={item.id} />
                           }
                          label={item.displayName}
                         />)
@@ -174,7 +183,8 @@ const handleClose = () => {
               {/* end here... */}
  
               <CardActions sx={{ justifyContent: 'flex-end' }}>
-                    <Button type="submit" variant="contained">
+                    <Button type="submit"
+variant="contained">
                       Save details
                     </Button>
               </CardActions>
